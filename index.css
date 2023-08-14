@@ -51,6 +51,9 @@ button:focus{
     text-align: center;
     height: fit-content;
 }
+#display-area {
+    margin: 0;
+}
 .clear-btn {
     position: absolute;
     right: 0;
@@ -207,3 +210,5 @@ button:focus{
     width: fit-content;
     position: fixed;
 }
+
+/* animation styles */

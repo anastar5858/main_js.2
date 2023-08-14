@@ -2,6 +2,7 @@ import * as darkMode from './assets/js/dark.js';
 import * as logicHandlers from './assets/js/logic.js';
 import * as keyboardFuncNav from './assets/js/keyboardNav.js';
 import * as keyboardFuncShort from './assets/js/keyboardShort.js';
+import * as animations from './assets/js/animation.js';
 // handle dark mode (logic independant) **
 const darkModeInput = document.getElementById('dark-mode');
 const darkModeHandler = (e) => {
@@ -49,3 +50,7 @@ const mainCalcContainer = document.getElementById('main-calc-con');
 detailsElement.addEventListener('toggle', (e) => {
     e.target.open ? mainCalcContainer.classList.add('invisible-calc') :mainCalcContainer.classList.remove('invisible-calc');
 });
+// animation mode (logic independant) **
+// clear animation
+const clearCanvas = document.getElementById('clear-animate');
+animations.configureCanvasDimensions(clearCanvas);
