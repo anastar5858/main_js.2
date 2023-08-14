@@ -63,7 +63,7 @@ const animateClear = (xStep, ctx, yTop, yBottom, alternate, canvasWidth, animati
     document.getElementById('display-area').style.fontSize = '25px';
     document.getElementById('display-area').style.fontFamily = 'monospace';
     document.getElementById('display-area').style.letterSpacing = '0';
-    numberOfCharacters === undefined ? numberOfCharacters = Math.floor(canvasWidth / 25) * 2 : numberOfCharacters = numberOfCharacters;
+    numberOfCharacters === undefined ? numberOfCharacters = Math.floor(canvasWidth / 25) * 1.8 : numberOfCharacters = numberOfCharacters;
     if (numberOfCharacters > 0) {
         !alternate ? document.getElementById('display-area').textContent += '0' : document.getElementById('display-area').textContent += '1'
         numberOfCharacters--
