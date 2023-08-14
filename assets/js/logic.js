@@ -92,7 +92,7 @@ export const signBtnHandler = (displayArea) => {
 }
 // undo btn handler
 export const removeLast = (arr) => arr.splice(0, arr.length - 1);
-export const undoBtnHandler = (displayArea) => {
+export const undoBtnHandler = (displayArea, resultArea) => {
     redo = {};
     // check if we want to remove from second, first, operation
     // only first
@@ -101,7 +101,7 @@ export const undoBtnHandler = (displayArea) => {
         const newOperand = removeLast(operationsObj.firstOperand.split('')).join('');
         operationsObj.firstOperand = newOperand;
         if (operationsObj.firstOperand === '') {
-            clearCalc(displayArea)
+            clearCalc(displayArea, resultArea)
             return
         }
     }

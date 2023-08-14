@@ -32,7 +32,7 @@ const signChangeBtn = document.getElementById('sign-change-btn');
 signChangeBtn.addEventListener('click', () => logicHandlers.signBtnHandler(displayArea));
 // undo btn
 const undoBtn = document.getElementById('undo-btn');
-undoBtn.addEventListener('click', () => logicHandlers.undoBtnHandler(displayArea));
+undoBtn.addEventListener('click', () => logicHandlers.undoBtnHandler(displayArea, resultArea));
 // redo btn
 const redoBtn = document.getElementById('redo-btn');
 redoBtn.addEventListener('click', () => logicHandlers.redoBtnHandler(displayArea));
