@@ -2,7 +2,8 @@ import * as darkMode from './assets/js/dark.js';
 import * as logicHandlers from './assets/js/logic.js';
 import * as keyboardFuncNav from './assets/js/keyboardNav.js';
 import * as keyboardFuncShort from './assets/js/keyboardShort.js';
-import * as animations from './assets/js/animationClear.js';
+import * as animationsClear from './assets/js/animationClear.js';
+import * as animationsElectron from './assets/js/animationElectrons.js';
 // handle dark mode (logic independant) **
 let animationMode = false;
 const darkModeInput = document.getElementById('dark-mode');
@@ -57,3 +58,6 @@ detailsElement.addEventListener('toggle', (e) => {
     e.target.open ? mainCalcContainer.classList.add('invisible-calc') :mainCalcContainer.classList.remove('invisible-calc');
 });
 // animation mode (logic independant) **
+// electrons animation
+const electronCanvas = document.getElementById('electrons-animate');
+animationsElectron.configureCanvasDimensions(electronCanvas);

@@ -1,7 +1,6 @@
 export const configureCanvasDimensions = (canvas) => {
     return new Promise((resolve) => {
         canvas.style.display = 'block';
-        console.log('wow', canvas)
         const displayArea = document.getElementById('display-area');
         const displayContainer = document.getElementById('calc-top');
         const displayContainerBox = displayContainer.getBoundingClientRect();
@@ -42,7 +41,7 @@ const animateClear = (xStep, ctx, yTop, yBottom, alternate, canvasWidth, animati
             document.getElementById('display-area').style.fontSize = '';
             document.getElementById('display-area').style.fontFamily = '';
             document.getElementById('display-area').style.letterSpacing = '';
-            canvas.style.display = 'none'
+            canvas.style.display = ''
             resolve()
         }, 1000 * 1)
         return
