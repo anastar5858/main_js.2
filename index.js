@@ -16,9 +16,9 @@ const numberBtns = [...document.getElementsByClassName('btn-numbers')];
 numberBtns.forEach((nmbrBtn) => nmbrBtn.addEventListener('click', (e) => logicHandlers.numberBtnsHandler(e.target.textContent, displayArea)));
 // operations btns
 const operationsBtns = [...document.getElementsByClassName('operator')];
-operationsBtns.forEach((operationBtn) => operationBtn.addEventListener('click', (e) => logicHandlers.operationBtnsHandler(e.target.textContent, displayArea)))
-// equal btn
 const resultArea = document.getElementById('results-area');
+operationsBtns.forEach((operationBtn) => operationBtn.addEventListener('click', (e) => logicHandlers.operationBtnsHandler(e.target.textContent, displayArea, resultArea)))
+// equal btn
 const equalBtn = document.getElementById('equal-btn');
 equalBtn.addEventListener('click', (e) => logicHandlers.equalBtnHandler(displayArea, resultArea));
 // clear btn

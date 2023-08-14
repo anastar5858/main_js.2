@@ -37,18 +37,22 @@ export const numberBtnsHandler = (number, displayElement) => {
     displayHandler(displayElement);
 }
 // operations btn handler
-export const operationBtnsHandler = (operation, displayElement) => {
+export const operationBtnsHandler = (operation, displayArea, resultArea) => {
     redo = {};
     if (operationsObj.firstOperand === '') return
     operation === 'Add' ? operation = '+'
     : operation === 'Subtract' ? operation = '-'
     : operation === 'Divide' ? operation = '/'
-    : operation = '*'
+    : operation = '*';
+    if ((operationsObj.firstOperand !== '' && operationsObj.operation !== '') && (operationsObj.secondOperand !== '' && operationsObj.secondOperand !== '.')) {
+        equalBtnHandler(displayArea, resultArea, operation);
+        return
+    }
     operationsObj.operation = operation;
-    displayHandler(displayElement)
+    displayHandler(displayArea)
 }
 // equal btn handler
-export const equalBtnHandler = (displayArea, resultArea) => {
+export const equalBtnHandler = (displayArea, resultArea, shortcut) => {
     if (operationsObj.firstOperand === '' || operationsObj.operation === '' || operationsObj.secondOperand === '') {
         const prevValue = resultArea.textContent;
         resultArea.textContent = 'Incomplete Value';
@@ -62,7 +66,7 @@ export const equalBtnHandler = (displayArea, resultArea) => {
         // update display
         operationsObj.firstOperand = convertToString(result);
         operationsObj.secondOperand = '';
-        operationsObj.operation = '';
+        shortcut ? operationsObj.operation = shortcut : operationsObj.operation = '';
         displayHandler(displayArea);
     }
 }
