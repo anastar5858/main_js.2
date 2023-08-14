@@ -2,13 +2,19 @@ import * as darkMode from './assets/js/dark.js';
 import * as logicHandlers from './assets/js/logic.js';
 import * as keyboardFuncNav from './assets/js/keyboardNav.js';
 import * as keyboardFuncShort from './assets/js/keyboardShort.js';
-import * as animations from './assets/js/animation.js';
+import * as animations from './assets/js/animationClear.js';
 // handle dark mode (logic independant) **
+let animationMode = false;
 const darkModeInput = document.getElementById('dark-mode');
+const animationModeInput = document.getElementById('animation-mode');
 const darkModeHandler = (e) => {
     e.target.checked ? darkMode.enableDarkMode() : darkMode.disableDarkMode();    
 }
+const animationModeHandler = (e) => {
+    e.target.checked ? animationMode = true : animationMode = false;    
+}
 darkModeInput.addEventListener('change', darkModeHandler)
+animationModeInput.addEventListener('change', animationModeHandler)
 // handle calculator logic **
 // event listeners on buttons ----->
 // numbers buttons
@@ -24,7 +30,7 @@ const equalBtn = document.getElementById('equal-btn');
 equalBtn.addEventListener('click', (e) => logicHandlers.equalBtnHandler(displayArea, resultArea));
 // clear btn
 const clearBtn = document.getElementById('clear-btn');
-clearBtn.addEventListener('click', () => logicHandlers.clearCalc(displayArea, resultArea));
+clearBtn.addEventListener('click', () => logicHandlers.clearCalc(displayArea, resultArea, animationMode));
 // decimal btn
 const decimalBtn = document.getElementById('decimal-btn');
 decimalBtn.addEventListener('click', () => logicHandlers.decimalHandler(displayArea));
@@ -51,6 +57,3 @@ detailsElement.addEventListener('toggle', (e) => {
     e.target.open ? mainCalcContainer.classList.add('invisible-calc') :mainCalcContainer.classList.remove('invisible-calc');
 });
 // animation mode (logic independant) **
-// clear animation
-const clearCanvas = document.getElementById('clear-animate');
-animations.configureCanvasDimensions(clearCanvas);

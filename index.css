@@ -212,3 +212,6 @@ button:focus{
 }
 
 /* animation styles */
+#clear-animate {
+    display: none;
+}

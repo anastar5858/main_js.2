@@ -1,3 +1,5 @@
+// animation logic
+import * as animations from './animationClear.js';
 // redo object
 let redo = {};
 // global operation object
@@ -71,8 +73,10 @@ export const equalBtnHandler = (displayArea, resultArea, shortcut) => {
     }
 }
 // clear btn handler
-export const clearCalc = (displayArea, resultArea) => {
+export const clearCalc = async (displayArea, resultArea, animationMode) => {
     if (resultArea) resultArea.textContent = '0';
+    const clearCanvas = document.getElementById('clear-animate');
+    if (animationMode && displayArea.textContent !== '') await animations.configureCanvasDimensions(clearCanvas);
     displayArea.textContent = '';
     for (const key in operationsObj) operationsObj[key] = '';
 }
