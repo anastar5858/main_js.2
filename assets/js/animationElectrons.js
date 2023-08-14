@@ -7,7 +7,6 @@ export const configureCanvasDimensions = (canvas) => {
     const testingBtn = document.getElementById('decimal-btn')
     animateRightSet(canvas, testingBtn);
 }
-
 const animateRightSet = (canvas, btn) => {
     const ctx = canvas.getContext('2d');
     // find area outside the calc area to the left
@@ -24,23 +23,17 @@ const animateRightSet = (canvas, btn) => {
     const animationStep = Math.round((distanceX / 30) * 100) / 100;
     // parameters: (canvas, starting steo (incremented), animation step (for stopping condition))
     requestAnimationFrame(() => animateRight(ctx, btnRight, animationStep, btnTop, rightX))
-    // console.log(canvas, btn, calcContainerArea, rightX, btnRight, btnTop);
 }
-
 const animateRight = (ctx, start, animationStep, y, rightX) => {
-    console.log(start, animationStep, rightX)
-    if (Math.floor(start) === Math.floor(rightX)) {
+    if (Math.floor(start) >= Math.floor(rightX)) {
         return
     }
     ctx.beginPath();
     ctx.lineTo(start, y)
     ctx.lineTo(start + animationStep, y);
-    // ctx.arc(0, 0, 10, 0, Math.PI);
     ctx.stroke();
     ctx.closePath();
     // update and animate
     start += animationStep
     requestAnimationFrame(() => animateRight(ctx, start, animationStep, y, rightX))
-
-
 }
