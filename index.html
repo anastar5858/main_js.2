@@ -1,0 +1,88 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <script src="./index.js" type="module" defer></script>
+    <title>Calculator</title>
+</head>
+<body class="body">
+    <header>
+        <input id="dark-mode" class="header-input" type="checkbox">
+        <label for="dark-mode">Dark Mode</label>
+        <input id="animation-mode" class="header-input" type="checkbox">
+        <label for="animation-mode">Animation Mode</label>
+        <details id="keyboard-instructions" class="keyboard-instructions">
+            <summary>Keyboard Shortcuts:</summary>
+            <strong class="instruct">(CTRL) + (DELETE) = Clear Calculator.</strong>
+            <strong class="instruct">(CTRL) + (.) = Add Decimal Point.</strong>
+            <strong class="instruct">(CTRL) + (-) = Change Sign +/-.</strong>
+            <strong class="instruct">(CTRL) + (BACKSPACE) = Undo Last Step.</strong>
+            <strong class="instruct">(CTRL) + (#) = Redo Last Step.</strong>
+            <strong class="instruct">(ALT) + (A) = Perform Addition.</strong>
+            <strong class="instruct">(ALT) + (S) = Perform Subtraction.</strong>
+            <strong class="instruct">(ALT) + (Q) = Perdorm Division.</strong>
+            <strong class="instruct">(ALT) + (W) = Perform Multiplication.</strong>
+            <strong class="instruct">(ALT) + (=) = Equals.</strong>
+            <strong class="instruct">(SHIFT) + (1) = Add 1 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (2) = Add 2 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (3) = Add 3 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (4) = Add 4 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (5) = Add 5 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (6) = Add 6 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (7) = Add 7 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (8) = Add 8 to Display.</strong>
+            <strong class="instruct">(SHIFT) + (9) = Add 9 to Display.</strong>
+        </details>
+    </header>
+    <!-- calculator container  -->
+    <main id="main-calc-con" class="calc-con">
+    <!-- top area (display clear and result) -->
+    <section class="calc-top">
+        <div class="display-text-con">
+            <strong class="result-text big"><p id="display-area"></p>
+                <button id="clear-btn" class="clear-btn btn promi mid-font btn-cut btn-vital">
+                    clear
+                </button>
+                <span id="results-area" class="result text promi">0</span>
+            </strong>
+        </div>
+    </section>
+    <!-- mid area (numbers and decima/sign change buttons) -->
+    <section class="calc-mid">
+        <button id="sign-change-btn" class="mid-green btn-cut btn-vital"><span class="mode-text">Sign </span>(+/-)</button>
+        <div class="numbers-flex">
+            <button class="btn-numbers big">1</button>
+            <button class="btn-numbers big">2</button>
+            <button class="btn-numbers big">3</button>
+            <button class="btn-numbers big">4</button>
+            <button class="btn-numbers big">5</button>
+            <button class="btn-numbers big">6</button>
+            <button class="btn-numbers big">7</button>
+            <button class="btn-numbers big">8</button>
+            <button class="btn-numbers big">9</button>
+            <button class="btn-numbers big">0</button>
+        </div>
+        <button id="decimal-btn" class="mid-green btn-cut btn-vital"><span class="mode-text">Decimal </span>(.)</button>
+    </section>
+    <!-- bottom area (redo, undo, operators and equal button) -->
+    <section class="calc-bottom">
+        <section class="undo-redo">
+            <button id="redo-btn" class="undo btn-cut btn-vital">Redo</button>
+            <button id="undo-btn" class="undo btn-vital">Undo</button>
+        </section>
+        <section class="operators">
+        <button id="add" class="operator btn-vital">Add</button>
+        <button id="sub" class="operator btn-vital">Subtract</button>
+        <button id="div" class="operator btn-vital">Divide</button>
+        <button id="mul" class="operator btn-vital">Multiply</button>
+        </section>
+        <section class="equal">
+         <button id="equal-btn" class="equal btn-vital">=</button>
+        </section>
+    </section>
+    </main>
+    <footer>
+    </footer>  
+</body>
+</html>
