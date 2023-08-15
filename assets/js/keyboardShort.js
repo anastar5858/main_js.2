@@ -10,12 +10,12 @@ export const executeShortcut = (e) => {
     // redo btn
     if (e.ctrlKey && e.key === '#') document.getElementById('redo-btn').click();
     // add, sub, divide, multi
-    if (e.altKey && e.key === 'a') document.getElementById('add').click();
-    if (e.altKey && e.key === 's') document.getElementById('sub').click();
-    if (e.altKey && e.key === 'q') document.getElementById('div').click();
-    if (e.altKey && e.key === 'w') document.getElementById('mul').click();
+    if (e.shiftKey && e.key === 'A') document.getElementById('add').click();
+    if (e.shiftKey && e.key === 'S') document.getElementById('sub').click();
+    if (e.shiftKey && e.key === 'Q') document.getElementById('div').click();
+    if (e.shiftKey && e.key === 'W') document.getElementById('mul').click();
     // equal
-    if (e.altKey && e.key === '=') document.getElementById('equal-btn').click();
+    if (e.shiftKey && e.key === '+') document.getElementById('equal-btn').click();
     // now numbers all with shift + number
     if (e.shiftKey && e.key === '!') document.getElementsByClassName('btn-numbers')[0].click();
     if (e.shiftKey && e.key === '"') document.getElementsByClassName('btn-numbers')[1].click();
