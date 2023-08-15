@@ -1,5 +1,6 @@
 // animation logic
 import * as animations from './animationClear.js';
+import * as animationsElectron from './animationElectrons.js';
 // redo object
 let redo = {};
 // global operation object
@@ -29,7 +30,10 @@ export const operate = (operation) => {
 // display function
 export const displayHandler = (displayElement) => displayElement.textContent = `${operationsObj.firstOperand} ${operationsObj.operation === '' ? '(No operation)' : operationsObj.operation} ${operationsObj.secondOperand === '' ? '(?)' : operationsObj.secondOperand}`;
 // number btns handler
-export const numberBtnsHandler = (number, displayElement) => {
+export const numberBtnsHandler = async (e, displayElement, animationMode) => {
+    const number = e.target.textContent;
+    const electronCanvas = document.getElementById('electrons-animate');
+    if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
     redo = {};
     operationsObj.firstOperand === '' || operationsObj.operation === '' ? operationsObj.firstOperand += number : operationsObj.secondOperand += number;
     // no zero at the start please
