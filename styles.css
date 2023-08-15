@@ -1,0 +1,105 @@
+:root{
+    --main-background:hsl(222, 26%, 31%);
+    --keypad-background: hsl(223, 31%, 20%);
+    --screen-background:hsl(224, 36%, 15%);
+  
+    --key-background:hsl(30, 25%, 89%);
+    --key-shadow:hsl(28, 16%, 65%);
+  
+    --key-color-light:hsl(0, 0%, 100%);
+    --key-color-dark: hsl(221, 14%, 31%);
+  
+    --equal-sign-background-color:hsl(6, 63%, 50%);
+    --equal-sign-shadow-background-color:hsl(6, 70%, 34%);
+  
+    --big-buttons-background-color:hsl(225, 21%, 49%);
+    --big-buttons-shadow-color:hsl(224, 28%, 35%);
+  }
+  .main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+.calculator-buttons{
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 20px;
+    padding:25px;
+    background-color: var(--keypad-background);
+  }
+
+  /* buttons */
+.calculator-buttons{
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 20px;
+    padding:25px;
+    background-color: var(--keypad-background);
+  }
+  button{
+    color:var(--key-color-dark);
+    text-align: center;
+    text-transform: uppercase;
+    min-height:50px;
+    border-radius: 7px;
+    cursor: pointer;
+    background-color: var(--key-background);
+    font-family: 'League Spartan', sans-serif;
+    outline: none;
+    border: none;
+    font-size: 34px;
+    box-shadow: 0px 3px 0px 0px var(--key-shadow);
+    
+  }
+  button:hover{
+    filter: brightness(110%);
+    animation: ease-in;
+  }
+  button:active{
+    box-shadow: none;
+    transform: translateY(2px);
+  }
+  button:focus{
+    outline: none;
+  }
+  .equal-sign{
+    color:var(--key-color-light);
+    background-color:var(--equal-sign-background-color);
+    box-shadow: 0px 3px 0px 0px var(--equal-sign-shadow-background-color);
+    grid-column: 3/span 2;
+  
+  }
+  .clear{
+    grid-column: 1/span 2;
+  }
+  
+  .clear, .del{
+    background-color: var(--big-buttons-background-color);
+    color:var(--key-color-light);
+    box-shadow: 0px 3px 0px 0px var(--big-buttons-shadow-color);
+  }
+  /* calculator display */
+  .calculator-display{
+    background-color: var(--screen-background);
+  
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom:20px;
+    border-radius: 10px;
+  }
+  .calculator-display h1{
+    margin:0px;
+    padding:25px;
+    overflow-x:auto;
+    color: var(--key-color-light);
+  }
+
+  .calculator-container{
+    width: 50%;
+    max-width: 480px;
+    min-width: 345px;
+  }
