@@ -32,18 +32,19 @@ export const displayHandler = (displayElement) => displayElement.textContent = `
 // number btns handler
 export const numberBtnsHandler = async (e, displayElement, animationMode) => {
     const number = e.target.textContent;
-    const electronCanvas = document.getElementById('electrons-animate');
-    if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
     redo = {};
     operationsObj.firstOperand === '' || operationsObj.operation === '' ? operationsObj.firstOperand += number : operationsObj.secondOperand += number;
     // no zero at the start please
     if (operationsObj.firstOperand [0] === '0')  operationsObj.firstOperand = '';
     if (operationsObj.secondOperand [0] === '0')  operationsObj.secondOperand = '';
     if (operationsObj.firstOperand === '') return
+    const electronCanvas = document.getElementById('electrons-animate');
+    if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
     displayHandler(displayElement);
 }
 // operations btn handler
-export const operationBtnsHandler = (operation, displayArea, resultArea) => {
+export const operationBtnsHandler = async (e, displayArea, resultArea, animationMode) => {
+    let operation = e.target.textContent;
     redo = {};
     if (operationsObj.firstOperand === '') return
     operation === 'Add' ? operation = '+'
@@ -51,14 +52,19 @@ export const operationBtnsHandler = (operation, displayArea, resultArea) => {
     : operation === 'Divide' ? operation = '/'
     : operation = '*';
     if ((operationsObj.firstOperand !== '' && operationsObj.operation !== '') && (operationsObj.secondOperand !== '' && operationsObj.secondOperand !== '.')) {
-        equalBtnHandler(displayArea, resultArea, operation);
+        const electronCanvas = document.getElementById('electrons-animate');
+        const equalBtn = document.getElementById('equal-btn');
+        if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
+        equalBtnHandler(displayArea, resultArea, operation, animationMode, equalBtn);
         return
     }
     operationsObj.operation = operation;
+    const electronCanvas = document.getElementById('electrons-animate');
+    if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
     displayHandler(displayArea)
 }
 // equal btn handler
-export const equalBtnHandler = (displayArea, resultArea, shortcut) => {
+export const equalBtnHandler = async (displayArea, resultArea, shortcut, animationMode, e) => {
     if (operationsObj.firstOperand === '' || operationsObj.operation === '' || operationsObj.secondOperand === '') {
         const prevValue = resultArea.textContent;
         resultArea.textContent = 'Incomplete Value';
@@ -73,34 +79,42 @@ export const equalBtnHandler = (displayArea, resultArea, shortcut) => {
         operationsObj.firstOperand = convertToString(result);
         operationsObj.secondOperand = '';
         shortcut ? operationsObj.operation = shortcut : operationsObj.operation = '';
+        const electronCanvas = document.getElementById('electrons-animate');
+        if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target ? e.target : e);
         displayHandler(displayArea);
     }
 }
 // clear btn handler
-export const clearCalc = async (displayArea, resultArea, animationMode) => {
+export const clearCalc = async (displayArea, resultArea, animationMode, e) => {
     if (resultArea) resultArea.textContent = '0';
     const clearCanvas = document.getElementById('clear-animate');
+    const electronCanvas = document.getElementById('electrons-animate');
+    if (animationMode && displayArea.textContent !== '') await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);;
     if (animationMode && displayArea.textContent !== '') await animations.configureCanvasDimensions(clearCanvas);
     displayArea.textContent = '';
     for (const key in operationsObj) operationsObj[key] = '';
 }
 // decimal btn handler
-export const decimalHandler = (displayArea) => {
+export const decimalHandler = async (displayArea, animationMode, e) => {
     redo = {};
     if (displayArea.textContent.includes('.')) return;
     operationsObj.firstOperand === '' || operationsObj.operation === '' ? operationsObj.firstOperand += '.' : operationsObj.secondOperand += '.';
+    const electronCanvas = document.getElementById('electrons-animate');
+    if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
     displayHandler(displayArea);
 }
 // sign btn handler
-export const signBtnHandler = (displayArea) => {
+export const signBtnHandler = async (displayArea, animationMode, e) => {
     redo = {};
     if (operationsObj.firstOperand === '.' || operationsObj.firstOperand === '') return
     operationsObj.firstOperand !== '' && operationsObj.operation === '' ? operationsObj.firstOperand = convertToString(Number(operationsObj.firstOperand * -1)) : operationsObj.secondOperand = convertToString(Number(operationsObj.secondOperand * -1));
+    const electronCanvas = document.getElementById('electrons-animate');
+    if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
     displayHandler(displayArea);
 }
 // undo btn handler
 export const removeLast = (arr) => arr.splice(0, arr.length - 1);
-export const undoBtnHandler = (displayArea, resultArea) => {
+export const undoBtnHandler = async (displayArea, resultArea, animationMode, e) => {
     redo = {};
     // check if we want to remove from second, first, operation
     // only first
@@ -123,15 +137,19 @@ export const undoBtnHandler = (displayArea, resultArea) => {
         operationsObj.secondOperand = newOperand;
     }
     // update display
+    const electronCanvas = document.getElementById('electrons-animate');
+    if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
     displayHandler(displayArea);
 }
 // redo btn handler 
-export const redoBtnHandler = (displayArea) => {
+export const redoBtnHandler = async (displayArea, animationMode, e) => {
     for (const property in operationsObj) {
         const redoProp = Object.keys(redo)[0]
         if (property === redoProp) {
             operationsObj[property] = redo[redoProp];
             redo = {};
+            const electronCanvas = document.getElementById('electrons-animate');
+            if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
             displayHandler(displayArea)
             return;
         }

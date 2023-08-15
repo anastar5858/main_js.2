@@ -25,25 +25,25 @@ numberBtns.forEach((nmbrBtn) => nmbrBtn.addEventListener('click', (e) => logicHa
 // operations btns
 const operationsBtns = [...document.getElementsByClassName('operator')];
 const resultArea = document.getElementById('results-area');
-operationsBtns.forEach((operationBtn) => operationBtn.addEventListener('click', (e) => logicHandlers.operationBtnsHandler(e.target.textContent, displayArea, resultArea, animationMode)))
+operationsBtns.forEach((operationBtn) => operationBtn.addEventListener('click', (e) => logicHandlers.operationBtnsHandler(e, displayArea, resultArea, animationMode)))
 // equal btn
 const equalBtn = document.getElementById('equal-btn');
-equalBtn.addEventListener('click', (e) => logicHandlers.equalBtnHandler(displayArea, resultArea, animationMode));
+equalBtn.addEventListener('click', (e) => logicHandlers.equalBtnHandler(displayArea, resultArea, undefined, animationMode, e));
 // clear btn
 const clearBtn = document.getElementById('clear-btn');
-clearBtn.addEventListener('click', () => logicHandlers.clearCalc(displayArea, resultArea, animationMode));
+clearBtn.addEventListener('click', (e) => logicHandlers.clearCalc(displayArea, resultArea, animationMode, e));
 // decimal btn
 const decimalBtn = document.getElementById('decimal-btn');
-decimalBtn.addEventListener('click', () => logicHandlers.decimalHandler(displayArea, animationMode));
+decimalBtn.addEventListener('click', (e) => logicHandlers.decimalHandler(displayArea, animationMode, e));
 // negative/plus switch btn
 const signChangeBtn = document.getElementById('sign-change-btn');
-signChangeBtn.addEventListener('click', () => logicHandlers.signBtnHandler(displayArea, animationMode));
+signChangeBtn.addEventListener('click', (e) => logicHandlers.signBtnHandler(displayArea, animationMode, e));
 // undo btn
 const undoBtn = document.getElementById('undo-btn');
-undoBtn.addEventListener('click', () => logicHandlers.undoBtnHandler(displayArea, resultArea, animationMode));
+undoBtn.addEventListener('click', (e) => logicHandlers.undoBtnHandler(displayArea, resultArea, animationMode, e));
 // redo btn
 const redoBtn = document.getElementById('redo-btn');
-redoBtn.addEventListener('click', () => logicHandlers.redoBtnHandler(displayArea, animationMode));
+redoBtn.addEventListener('click', (e) => logicHandlers.redoBtnHandler(displayArea, animationMode, e));
 // handle calculator keyboard functionality **
 // keyboard navigation
 const btnCuts = [...document.getElementsByClassName('btn-cut')];
@@ -58,6 +58,3 @@ detailsElement.addEventListener('toggle', (e) => {
     e.target.open ? mainCalcContainer.classList.add('invisible-calc') :mainCalcContainer.classList.remove('invisible-calc');
 });
 // animation mode (logic independant) **
-// electrons animation
-// const electronCanvas = document.getElementById('electrons-animate');
-// animationsElectron.configureCanvasDimensions(electronCanvas);
