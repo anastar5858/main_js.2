@@ -107,6 +107,7 @@ export const decimalHandler = async (displayArea, animationMode, e) => {
 export const signBtnHandler = async (displayArea, animationMode, e) => {
     redo = {};
     if (operationsObj.firstOperand === '.' || operationsObj.firstOperand === '') return
+    if ((operationsObj.firstOperand !== '' && operationsObj.operation !== '') && operationsObj.secondOperand === '') return
     operationsObj.firstOperand !== '' && operationsObj.operation === '' ? operationsObj.firstOperand = convertToString(Number(operationsObj.firstOperand * -1)) : operationsObj.secondOperand = convertToString(Number(operationsObj.secondOperand * -1));
     const electronCanvas = document.getElementById('electrons-animate');
     if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
