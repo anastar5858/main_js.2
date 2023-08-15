@@ -69,12 +69,13 @@ const animateRight = (ctx, start, animationStep, y, rightX, calcContainerArea, c
 
 const animateUp = (ctx, x, animationStep, start, upY, calcContainerArea, canvas, btn, animateElectron) => {
     if (animateElectron) {
-        if (Math.floor(start) < Math.floor(upY)) {
+        if (Math.floor(start) <= Math.floor(upY)) {
+            ctx.clearRect(x - 11, start, 11 * 2, 11 * 2)
             // move left to mid poing of calc top edge
             const leftX = calcContainerArea.left + ((calcContainerArea.right - calcContainerArea.left) / 2);
             const distanceX = x - leftX
             animationStep = Math.round((distanceX / 30) * 100) / 100;
-            // requestAnimationFrame(() => animateLeft(ctx, x, animationStep, start, leftX, calcContainerArea, canvas, btn))
+            requestAnimationFrame(() => animateLeft(ctx, x, animationStep, start, leftX, calcContainerArea, canvas, btn, animateElectron))
             return
         }
         // time to work on electron circle
@@ -105,7 +106,32 @@ const animateUp = (ctx, x, animationStep, start, upY, calcContainerArea, canvas,
     start -= animationStep
     requestAnimationFrame(() => animateUp(ctx, x, animationStep, start, upY, calcContainerArea, canvas, btn) )
 }
-const animateLeft = (ctx, start, animationStep, y, leftX, calcContainerArea, canvas, btn) => {
+const animateLeft = (ctx, start, animationStep, y, leftX, calcContainerArea, canvas, btn, animateElectron) => {
+    if (animateElectron) {
+        if (Math.floor(start) + 5 <= Math.floor(leftX)) {
+        ctx.clearRect(start - 5, y - 11, 30, 18)
+        // now link to display
+        const displayArea = document.getElementById('display-area');
+        const displayAreaBox = displayArea.getBoundingClientRect();
+        // now last lines animation
+        const bottomY = displayAreaBox.top - 20;
+        const distanceY = y - bottomY
+        animationStep = Math.round((distanceY / 30) * 100) / 100;
+        // requestAnimationFrame(() => animateBottom(ctx, start, animationStep, y, bottomY, calcContainerArea, canvas, btn))
+        return
+        }
+        // time to work on electron circle
+        ctx.clearRect(start + 11, y - 11, 9 * 2, 9 * 2)
+        ctx.beginPath();
+        ctx.arc(start, y, 10, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = 'gold';
+        ctx.fill();
+        ctx.closePath();
+        start -= animationStep
+        requestAnimationFrame(() => animateLeft(ctx, start, animationStep, y, leftX, calcContainerArea, canvas, btn, animateElectron))
+        return
+    }
     if (Math.floor(start) <= Math.floor(leftX)) {
         // now link to display
         const displayArea = document.getElementById('display-area');
@@ -115,7 +141,6 @@ const animateLeft = (ctx, start, animationStep, y, leftX, calcContainerArea, can
         const distanceY = y - bottomY
         animationStep = Math.round((distanceY / 30) * 100) / 100;
         requestAnimationFrame(() => animateBottom(ctx, start, animationStep, y, bottomY, calcContainerArea, canvas, btn))
-
         return
     }
     ctx.beginPath();
