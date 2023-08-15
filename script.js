@@ -30,7 +30,7 @@ function round(vlaue, decimals) {
 let currentInput = "";
 let previousInput = "";
 let operator = null;
-  
+
 function calculate() {
     const x = parseFloat(previousInput);
     const y = parseFloat(currentInput);
@@ -108,7 +108,7 @@ operatorButtons.forEach((button) => {
             }
             operator = button.dataset.value;
             currentInput = "";
-            updateDisplay();
+            // updateDisplay();
           }
         clearOperatorActive();
         button.classList.add("operator-active");
@@ -156,6 +156,13 @@ function deleteNumber() {
         currentInput = "";
         updateDisplay();
     }
+}
+
+// Function to clear currentInput and previousInput
+function clearInputs() {
+    currentInput = "";
+    previousInput = "";
+    updateDisplay();
 }
 
 // Decimal click event
@@ -225,9 +232,3 @@ document.addEventListener("keydown", (event) => {
     }
 })
 
-// Function to clear currentInput and previousInput
-function clearInputs() {
-    currentInput = "";
-    previousInput = "";
-    updateDisplay();
-}
