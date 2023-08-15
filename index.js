@@ -59,9 +59,15 @@ detailsElement.addEventListener('toggle', (e) => {
     e.target.open ? mainCalcContainer.classList.add('invisible-calc') :mainCalcContainer.classList.remove('invisible-calc');
 });
 // animation mode (logic independant) **
-const allBtns = document.querySelectorAll('button');
-const allBtnsArr = [...allBtns];
-allBtns.forEach((btn) => btn.addEventListener('click', () => {
-    const children = document.getElementsByClassName('animation-box');
-    if (children.length > 0) logicHandlers.removeAnimationElements([...children]);
-}))
+// subtraction animation
+async function test() {
+   const additionAnimation = await animationsOperations.initialiseAnimation('5', '-', '5');
+   console.log('ummm', additionAnimation)
+}
+test()
+// const allBtns = document.querySelectorAll('button');
+// const allBtnsArr = [...allBtns];
+// allBtns.forEach((btn) => btn.addEventListener('click', () => {
+//     const children = document.getElementsByClassName('animation-box');
+//     if (children.length > 0) logicHandlers.removeAnimationElements([...children]);
+// }))

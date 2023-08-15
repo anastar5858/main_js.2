@@ -83,7 +83,7 @@ export const equalBtnHandler = async (displayArea, resultArea, shortcut, animati
         if (result === 'Not Allowed') return resultArea.textContent = result;
         result = Math.round(result * 1000) / 1000;  
         const electronCanvas = document.getElementById('electrons-animate');
-        let carryWithAnimation;
+        let carryWithAnimation = false;
         if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target ? e.target : e);
         if (animationMode) carryWithAnimation = await animationsOperations.initialiseAnimation(operationsObj.firstOperand, operationsObj.operation, operationsObj.secondOperand);
         if (carryWithAnimation === false) resultArea.textContent = convertToString(result);
