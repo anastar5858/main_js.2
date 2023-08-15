@@ -1,6 +1,7 @@
 // animation logic
 import * as animations from './animationClear.js';
 import * as animationsElectron from './animationElectrons.js';
+import * as animationsOperations from './animationOperations.js';
 // redo object
 let redo = {};
 // global operation object
@@ -8,6 +9,15 @@ export const operationsObj = {
     firstOperand: '',
     operation: '',
     secondOperand: '',
+}
+export const removeAnimationElements = (children) => {
+    const childrenArr = [...children];
+    childrenArr.forEach((child) => child.remove(child));
+    const msgPara = document.getElementById('animationMessage');
+    msgPara.style.display = '';
+    const displayArea = document.getElementById('display-area');
+    displayArea.style.display = ''
+    displayArea.textContent = '';
 }
 export const convertToNumber = (str) => Number(str);
 export const convertToString = (argument) => argument.toString();
@@ -52,9 +62,7 @@ export const operationBtnsHandler = async (e, displayArea, resultArea, animation
     : operation === 'Divide' ? operation = '/'
     : operation = '*';
     if ((operationsObj.firstOperand !== '' && operationsObj.operation !== '') && (operationsObj.secondOperand !== '' && operationsObj.secondOperand !== '.')) {
-        const electronCanvas = document.getElementById('electrons-animate');
         const equalBtn = document.getElementById('equal-btn');
-        if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);
         equalBtnHandler(displayArea, resultArea, operation, animationMode, equalBtn);
         return
     }
@@ -74,14 +82,16 @@ export const equalBtnHandler = async (displayArea, resultArea, shortcut, animati
         let result = operate(operationsObj.operation);
         if (result === 'Not Allowed') return resultArea.textContent = result;
         result = Math.round(result * 1000) / 1000;  
-        resultArea.textContent = convertToString(result);
+        const electronCanvas = document.getElementById('electrons-animate');
+        let carryWithAnimation;
+        if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target ? e.target : e);
+        if (animationMode) carryWithAnimation = await animationsOperations.initialiseAnimation(operationsObj.firstOperand, operationsObj.operation, operationsObj.secondOperand);
+        if (carryWithAnimation === false) resultArea.textContent = convertToString(result);
         // update display
         operationsObj.firstOperand = convertToString(result);
         operationsObj.secondOperand = '';
         shortcut ? operationsObj.operation = shortcut : operationsObj.operation = '';
-        const electronCanvas = document.getElementById('electrons-animate');
-        if (animationMode) await animationsElectron.configureCanvasDimensions(electronCanvas, e.target ? e.target : e);
-        displayHandler(displayArea);
+        if (carryWithAnimation === false) displayHandler(displayArea);
     }
 }
 // clear btn handler

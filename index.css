@@ -218,3 +218,12 @@ button:focus{
 #electrons-animate {
     display: none;
 }
+.animation-box {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
+    background-color: gold;
+}
+#animationMessage {
+    display: none;
+}
