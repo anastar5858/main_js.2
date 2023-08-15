@@ -1,9 +1,22 @@
+const getAdjustedPosition = (element) => {
+    const rect = element.getBoundingClientRect();
+    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
+    return {
+        top: rect.top + scrollY,
+        left: rect.left + scrollX,
+        right: rect.right + scrollX,
+        bottom: rect.bottom + scrollY,
+        width: rect.width,
+        height: rect.height
+    };
+}
 export const configureCanvasDimensions = async (canvas, btn) => {
     return new Promise((resolve) => {
         canvas.style.display = 'block';
         canvas.style.zIndex = 1;
         const body = document.getElementsByClassName('body')[0];
-        const bodyArea = body.getBoundingClientRect();
+        const bodyArea = getAdjustedPosition(body);
         canvas.style.position = 'absolute';
         canvas.width = bodyArea.width;
         canvas.height = bodyArea.height;
@@ -14,11 +27,11 @@ const animateRightSet = (canvas, btn, animateElectron, resolve) => {
     const ctx = canvas.getContext('2d');
     // find area outside the calc area to the left
     const calcContainer = document.getElementById('main-calc-con');
-    const calcContainerArea = calcContainer.getBoundingClientRect();
+    const calcContainerArea = getAdjustedPosition(calcContainer);
     // get an area to the right (5 is pixel offset)
     const rightX = calcContainerArea.right + 50;
     // move to the right from button right edge
-    const btnArea = btn.getBoundingClientRect();
+    const btnArea = getAdjustedPosition(btn);
     const btnRight = btnArea.right;
     const btnTop = btnArea.top + btnArea.height / 2; 
     // now move slowly
@@ -114,7 +127,7 @@ const animateLeft = (ctx, start, animationStep, y, leftX, calcContainerArea, can
         ctx.clearRect(start - 5, y - 11, 30, 18)
         // now link to display
         const displayArea = document.getElementById('display-area');
-        const displayAreaBox = displayArea.getBoundingClientRect();
+        const displayAreaBox = getAdjustedPosition(displayArea);
         // now last lines animation
         const bottomY = displayAreaBox.top - 20;
         const distanceY = y - bottomY
@@ -137,7 +150,7 @@ const animateLeft = (ctx, start, animationStep, y, leftX, calcContainerArea, can
     if (Math.floor(start) <= Math.floor(leftX)) {
         // now link to display
         const displayArea = document.getElementById('display-area');
-        const displayAreaBox = displayArea.getBoundingClientRect();
+        const displayAreaBox = getAdjustedPosition(displayArea);
         // now last lines animation
         const bottomY = displayAreaBox.top - 20;
         const distanceY = y - bottomY
