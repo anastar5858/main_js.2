@@ -72,23 +72,24 @@ button {
 button:hover {
     background-color: #1B1B1B;
 }
-button:active {
-    background-color:#1B1B1B;
-}
 .clear-all:hover {
     background-color: #222222;
 }
-.clear-all:active {
-    background-color: #222222;
-}
-.divide:hover, .multiply:hover, .add:hover, 
-.subtract:hover, .equals:hover {
-    background-color: #1D69CF;
-}
-.divide:active, .multiply:active, .add:active, 
-.subtract:active, .equals:active {
+.operator:hover, .equals:hover {
     background-color: #1D69CF;
 }
 .empty:hover {
     background-color: black;
+}
+button:active {
+    background-color:#1B1B1B;
+}
+.clear-all:active {
+    background-color: #222222;
+}
+.equals:active {
+    background-color: #1D69CF;
+}
+.operator-active {
+    background-color: #1D69CF;
 }

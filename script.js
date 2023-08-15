@@ -1,9 +1,5 @@
-// Assigning values
-// const addButton = document.querySelector(".add");
-// const subtractButton = document.querySelector(".subtract");
-// const multiplyButton = document.querySelector(".multiply");
-// const divideButton = document.querySelector(".divide");
 const display = document.querySelector(".display");
+let equalsButtonClicked = false;
 
 // Operators 
 function add(x, y) {
@@ -39,24 +35,55 @@ function calculate() {
     const x = parseFloat(previousInput);
     const y = parseFloat(currentInput);
     let result;
-    if (operator === "+") {
+
+    if (operator === "*" || operator === "/") {
+        return calculateIntermediate(x, y);
+    } else if (operator === "+") {
         result = add(x, y);
     } else if (operator === "-") {
         result = subtract(x, y);
-    } else if (operator === "*") {
+    }
+
+    return round(result, 8);
+
+}
+
+// Calculate intermediate results
+function calculateIntermediate(x, y) {
+    if (intermediateResult !== null) {
+        if (operator === "*") {
+            result = multiply(intermediateResult, y);
+        } else if (operator === "/") {
+            result = divide(intermediateResult, y);
+        }
+    }
+    if (operator === "*") {
         result = multiply(x, y);
     } else if (operator === "/") {
         result = divide(x, y);
-    } 
+    }
+
     return round(result, 8);
 }
 
+// Operator active state
+function clearOperatorActive() {
+    operatorButtons.forEach(operatorButton => {
+      operatorButton.classList.remove("operator-active");
+    });
+  }
 
 // Number click event
 const numberButtons = document.querySelectorAll(".number");
 numberButtons.forEach((button) => {
     button.addEventListener("click", () => { 
+        // Clear inputs only if equals button was clicked before
+        if (equalsButtonClicked) {
+            clearInputs(); 
+            equalsButtonClicked = false;
+        }
         numberClick(button);
+        clearOperatorActive();
     });
 })
 function numberClick(button) {
@@ -70,7 +97,12 @@ operatorButtons.forEach((button) => {
     button.addEventListener("click", () => { 
         if (currentInput !== "") {
             if (previousInput !== "") {
-              previousInput = calculate();
+              if (intermediateResult !== null) {
+                previousInput = intermediateResult.toString();
+                intermediateResult = null;
+                } else {
+                    previousInput = calculate();
+                }
             } else {
               previousInput = currentInput;
             }
@@ -78,21 +110,27 @@ operatorButtons.forEach((button) => {
             currentInput = "";
             updateDisplay();
           }
-    });
+        clearOperatorActive();
+        button.classList.add("operator-active");
+        });
 })
 
+
 // Equals click event
+let intermediateResult = null;
 const equalButton = document.querySelector(".equals");
 equalButton.addEventListener("click", () => { 
     if (currentInput !== "" && previousInput !== "" && operator !== null) {
-        currentInput = calculate();
+        intermediateResult = calculate(); // Store intermediate result
+        currentInput = intermediateResult.toString();
         previousInput = "";
         operator = null;
         updateDisplay();
-        }
+        equalsButtonClicked = true; 
+    }
 });
 
-// Clear click event
+// Clear-all click event
 const clearAllButton = document.querySelector(".clear-all");
 clearAllButton.addEventListener("click", () => { 
     clearDisplay();
@@ -139,4 +177,57 @@ function updateDisplay() {
     } else {
         display.innerText = previousInput;
     }
+}
+
+// Keyboard keydown event
+document.addEventListener("keydown", (event) => {
+    // Keyboard numbers
+    if (event.key >= 0 && event.key <= 9) {
+        currentInput = currentInput + event.key;
+        updateDisplay();
+    }
+    if (event.key === ".") {
+        displayDecimal();
+    }
+    
+    // Keyboard operators
+    const operatorKeys = ["+", "-", "*", "/"];
+    if (operatorKeys.includes(event.key)) {
+        if (currentInput !== "") {
+            if (previousInput !== "") {
+                previousInput = calculate();
+            } else {
+                previousInput = currentInput;
+            }
+            operator = event.key;
+            currentInput = "";
+            updateDisplay();
+        }
+    }
+        
+    // Keyboard enter
+    if (event.key === "Enter") {
+        if (currentInput !== "" && previousInput !== "" && operator !== null) {
+          currentInput = calculate();
+          previousInput = "";
+          operator = null;
+          updateDisplay();
+          clearInputs();
+        }
+      }
+
+    // Keyboard Backspace & Delete
+    if (event.key === "Backspace") {
+        deleteNumber();
+    }
+    if (event.key === "Delete") {
+        clearDisplay();
+    }
+})
+
+// Function to clear currentInput and previousInput
+function clearInputs() {
+    currentInput = "";
+    previousInput = "";
+    updateDisplay();
 }
