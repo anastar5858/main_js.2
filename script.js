@@ -76,6 +76,7 @@ const displayScreen = (val) => {
 //del function
 const deleteDigit = () =>{
     const displayValue = calculatorDisplay.textContent;
+    displayValue.length === 1 ? calculatorDisplay.textContent = '0':
     calculatorDisplay.textContent = displayValue.slice(0,displayValue.length - 1)
 }
 
