@@ -80,7 +80,7 @@ const  multiplicationAnimation = async (msgPara, firstOperand, secondOperand, la
     msgPara.style.left = divContainerBox.left + 'px';
     // start animation 
     // prepare groups
-    for(let i = 0; i < secondOperand; i++) {
+    for(let i = 0; i < secondOperand - 1; i++) {
         for(let j = 0; j < firstOperand; j++) {
             const lastBoxBox = getAdjustedPosition(lastBox);
             const calcTop = document.getElementById('calc-top');
@@ -109,7 +109,7 @@ const  multiplicationAnimation = async (msgPara, firstOperand, secondOperand, la
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = '';
         electronCanvas.style.zIndex = '';
-        resolve(true);
+        mainResolv(true);
     }, 1000 * 1);
 }
 const multiplyOffsetAnimate = (start, ending, stepSize, offset, lastBoxBox, thisResolve, msgPara) => {
