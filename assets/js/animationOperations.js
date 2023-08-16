@@ -69,9 +69,7 @@ const prepareSubOperation = (firstOperand, secondOperand, mainResolve) => {
     // now begin the subtraction animation
     setTimeout(() => requestAnimationFrame(() => subtractionAnimation(msgPara, lastBox, firstOperand, secondOperand, mainResolve)), 1000 * 1);
 }
-
 // Subtraction animations *******************
-
 const  subtractionAnimation = async (msgPara, lastBox, firstOperand, secondOperand, mainResolve) => {
     let count = 0;
     while(count < secondOperand) {
@@ -161,7 +159,6 @@ const subtractAnimationStep = async (msgPara, lastBox, box) => {
         resolve();
     })
 }
-
 const moveUpSubtracts = (topStart, topStep, totalTop, lastBox, captureStep, stepSize, thisResolve, msgPara, msgParaStart) => {
     if (captureStep) {
         msgParaStart = Number(getComputedStyle(msgPara).top.split('').filter((c) => !isNaN(c) || c== '.').join(''));
@@ -192,7 +189,6 @@ const moveRightSubtract = async (rightStep, rightDistance, leftDistance, lastBox
         requestAnimationFrame(() => moveRightSubtract(rightStep, rightDistance, leftDistance, lastBox, captureStep, stepSize, thisResolve));
     })
 }
-
 const animateBottomSub = async (startBottom, finishBottom, stepBottom, thisResolve, ctx, currentBottom) => {
     return new Promise((resolve) => {
         if (currentBottom > finishBottom) return thisResolve(currentBottom)
@@ -219,8 +215,6 @@ const animateLeftSub = (startLeft, finishLeft, stepLeft, thisResolve, ctx, curre
         requestAnimationFrame(() => animateLeftSub(startLeft, finishLeft, stepLeft, thisResolve, ctx, currentLeft))
     })
 }
-
-
 // addition animations *******************
 const prepareAddOperation = (firstOperand, secondOperand, resolve) => {
     // summing restrictions: no summations bigger than 10 for now
@@ -305,7 +299,6 @@ const addAnimationStep = async(msgPara, lastBox, currentBox) => {
         resolve()
     })
 }
-
 const moveBox = async(msgPara, currentBox, stepX, stepY, distanceX, distanceY, resolve2, upOrBottom, leftOrRight) => {
     return new Promise((resolve) => {
         if (resolve2 === undefined) resolve2 = resolve
