@@ -227,3 +227,6 @@ button:focus{
 #animationMessage {
     display: none;
 }
+#div-add-cont {
+    display: flex;
+}
