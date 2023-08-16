@@ -108,6 +108,8 @@ export const clearCalc = async (displayArea, resultArea, animationMode, e) => {
     const electronCanvas = document.getElementById('electrons-animate');
     if (animationMode && displayArea.textContent !== '') await animationsElectron.configureCanvasDimensions(electronCanvas, e.target);;
     if (animationMode && displayArea.textContent !== '') await animations.configureCanvasDimensions(clearCanvas);
+    const children = document.getElementsByClassName('animation-box');
+    removeAnimationElements([...children]);
     displayArea.textContent = '';
     for (const key in operationsObj) operationsObj[key] = '';
 }
