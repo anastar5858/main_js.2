@@ -69,6 +69,9 @@ const prepareSubOperation = (firstOperand, secondOperand, mainResolve) => {
     // now begin the subtraction animation
     setTimeout(() => requestAnimationFrame(() => subtractionAnimation(msgPara, lastBox, firstOperand, secondOperand, mainResolve)), 1000 * 1);
 }
+
+// Subtraction animations *******************
+
 const  subtractionAnimation = async (msgPara, lastBox, firstOperand, secondOperand, mainResolve) => {
     let count = 0;
     while(count < secondOperand) {
@@ -83,11 +86,28 @@ const  subtractionAnimation = async (msgPara, lastBox, firstOperand, secondOpera
         box.style.top = bodyBox.top;
         body.appendChild(box);
         const stepAnimation = await subtractAnimationStep(msgPara, lastBox, box)
+        // clean up resources
+        // remove the two boxes
+        box.remove();
+        lastBox.remove();
         // update last box as well (last child of display area)
-        // lastBox = box;
-        // count++
+        const children = document.getElementById('display-area').children
+        lastBox = children[children.length - 1];
+        count++
     }
     // after animation is complete
+    const displayArea = document.getElementById('display-area');
+    const displayAreaBox = getAdjustedPosition(displayArea);
+    msgPara.textContent = 'This is what\'s left (result)'
+    msgPara.style.top = displayAreaBox.top;
+    msgPara.style.left = displayAreaBox.left;
+    setTimeout(() => {
+        // clean inline styles
+        const electronCanvas = document.getElementById('electrons-animate');
+        electronCanvas.style.display = 'none';
+        electronCanvas.style.zIndex = '';
+        mainResolve(true);
+    } , 1000 * 1)
 }
 const subtractAnimationStep = async (msgPara, lastBox, box) => {
     return new Promise(async (resolve) => {
@@ -118,51 +138,58 @@ const subtractAnimationStep = async (msgPara, lastBox, box) => {
         const stepLeft = finishLeft / 100;
         const leftAnimation = await animateLeftSub(startLeft, finishLeft, stepLeft, undefined, ctx, currentLeft);
         // working from down here
-        // msgPara.textContent = 'Caught a fish';
-        // // now time to move the box (fish) to the top div (hunter)
-        // const endX = boxBox.left;
-        // // lastBox.style.left = endX + 'px';
-        // const parentElement = document.getElementById('calc-top');
-        // const parentOffsetTop = parentElement.offsetTop;
-        // const parentOffsetLeft = parentElement.offsetLeft;
-        // // Set the position of the child element relative to the document
-        // lastBox.style.position = "absolute";
-        // // lastBox.style.top = `${parentOffsetTop}px`; // Adjust the desired offset as needed
-        // // lastBox.style.left = `${parentOffsetLeft + 100}px`;
-
-        // // lastBox.style.position = 'absolute'
-        // lastBox.style.top = (boxBox.top - parentOffsetTop) + 'px';
-        // // lastBox.style.left = (parentOffsetLeft + parentOffsetLeft) + 'px';
-
-        // console.log('ummm', endX, lastBox, lastBox.style.top)
-        // const rightMovement = await moveRightSubtract();
-
-        // console.log('ummm')
-        // working from up here
-
-        // ctx.beginPath();
-        // ctx.lineTo(boxBox.right, boxBox.bottom);
-        // ctx.lineTo(boxBox.right, lastBoxBox.top);
-        // ctx.lineTo(boxBox.right, lastBoxBox.top);
-        // ctx.lineTo(lastBoxBox.right, lastBoxBox.top);
-        // ctx.stroke();
-        // ctx.closePath();
-        // msgPara.textContent = 'Wait for me Ya All!'
-        // const currentBoxBox = getAdjustedPosition(currentBox);
-        // const lastBoxBox = getAdjustedPosition(lastBox);
-        // const targetY = lastBoxBox.top ;
-        // const targetX = lastBoxBox.right;
-        // const stepY = targetY / 100;
-        // const stepX = targetX / 100;
-        // let upOrBottom = currentBoxBox.top - targetY < 0 ? 'bottom' : 'top';
-        // let leftOrRight = currentBoxBox.left - targetX < 0 ? 'right' : 'left';
-        // const stepAnimation = await moveBox(msgPara, currentBox, stepX, stepY, targetX, targetY, undefined, upOrBottom, leftOrRight)
-        // resolve()
+        msgPara.textContent = 'Caught a fish';
+        // now time to move the box (fish) to the top div (hunter)
+        // Set the position of the child element relative to the document
+        const pageOffset = getAdjustedPosition(document.getElementById('calc-top')).top - bodyArea.top;
+        const leftDistance = lastBoxBox.left - getAdjustedPosition(document.getElementById('calc-top')).left;
+        const rightDistance = (boxBox.right - getAdjustedPosition(document.getElementById('calc-top')).left) - leftDistance;
+        const rightStep = rightDistance / 100;
+        lastBox.style.position = "absolute";
+        // current position after absolute
+        // top = `calc(${(lastBoxBox.top - pageOffset)}px - 0.5rem)`
+        // left = `calc(${(0 + leftDistance ) + 'px'} - 0.5rem)`
+        const rightMovement = await moveRightSubtract(rightStep, rightDistance, leftDistance, lastBox, true, undefined, undefined);
+        msgPara.style.top = lastBoxBox.top + 'px';
+        // now move up to the page end
+        const topDistanceCalcBox = Math.abs(getAdjustedPosition(document.getElementById('calc-top')).top - boxBox.top);
+        const topDistanceCalcDiv = Math.abs(getAdjustedPosition(document.getElementById('calc-top')).top - lastBoxBox.top);
+        const totalTop = topDistanceCalcBox + topDistanceCalcDiv;
+        const topStart = lastBoxBox.top - pageOffset;
+        const topStep = totalTop / 100;
+        const upMovement = await moveUpSubtracts(topStart, topStep, totalTop, lastBox, true, undefined, undefined, msgPara);
+        resolve();
     })
 }
 
-const moveRightSubtract = async () => {
+const moveUpSubtracts = (topStart, topStep, totalTop, lastBox, captureStep, stepSize, thisResolve, msgPara, msgParaStart) => {
+    if (captureStep) {
+        msgParaStart = Number(getComputedStyle(msgPara).top.split('').filter((c) => !isNaN(c) || c== '.').join(''));
+        stepSize = topStep
+        captureStep = false;
+    }
     return new Promise((resolve) => {
+        if (topStep > totalTop) return thisResolve()
+        if (thisResolve === undefined) thisResolve = resolve;
+        // if (rightStep > rightDistance) return thisResolve()
+        lastBox.style.top = `calc(${(topStart) - (topStep) + 'px'} - 0.5rem)`;
+        msgPara.style.top = msgParaStart - topStep + 'px';
+        topStep += stepSize;
+        requestAnimationFrame(() => moveUpSubtracts(topStart, topStep, totalTop, lastBox, captureStep, stepSize, thisResolve, msgPara, msgParaStart));
+    })
+}
+const moveRightSubtract = async (rightStep, rightDistance, leftDistance, lastBox, captureStep, stepSize, thisResolve) => {
+    if (captureStep) {
+        stepSize = rightStep
+        captureStep = false;
+    }
+    return new Promise((resolve) => {
+        if (thisResolve === undefined) thisResolve = resolve;
+        if (rightStep > rightDistance) return thisResolve()
+        lastBox.style.left = `calc(${(0 + leftDistance) + rightStep + 'px'} - 0.5rem)`;
+        rightStep += stepSize;
+        // console.log(rightStep, stepSize)
+        requestAnimationFrame(() => moveRightSubtract(rightStep, rightDistance, leftDistance, lastBox, captureStep, stepSize, thisResolve));
     })
 }
 
@@ -194,6 +221,7 @@ const animateLeftSub = (startLeft, finishLeft, stepLeft, thisResolve, ctx, curre
 }
 
 
+// addition animations *******************
 const prepareAddOperation = (firstOperand, secondOperand, resolve) => {
     // summing restrictions: no summations bigger than 10 for now
     // no negatives as they should be treated as subtraction
