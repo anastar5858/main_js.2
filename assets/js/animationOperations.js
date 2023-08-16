@@ -160,6 +160,7 @@ const subtractAnimationStep = async (msgPara, lastBox, box) => {
     })
 }
 const moveUpSubtracts = (topStart, topStep, totalTop, lastBox, captureStep, stepSize, thisResolve, msgPara, msgParaStart) => {
+    msgPara.textContent = 'NOOOOOOOO!!!!'
     if (captureStep) {
         msgParaStart = Number(getComputedStyle(msgPara).top.split('').filter((c) => !isNaN(c) || c== '.').join(''));
         stepSize = topStep
