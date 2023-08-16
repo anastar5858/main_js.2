@@ -36,8 +36,10 @@ function calculate() {
     const y = parseFloat(currentInput);
     let result;
 
-    if (operator === "*" || operator === "/") {
-        return calculateIntermediate(x, y);
+    if (operator === "*") {
+        result = multiply(x, y);
+    }  else if (operator === "/") {
+        result = divide(x, y);
     } else if (operator === "+") {
         result = add(x, y);
     } else if (operator === "-") {
@@ -46,24 +48,6 @@ function calculate() {
 
     return round(result, 8);
 
-}
-
-// Calculate intermediate results
-function calculateIntermediate(x, y) {
-    if (intermediateResult !== null) {
-        if (operator === "*") {
-            result = multiply(intermediateResult, y);
-        } else if (operator === "/") {
-            result = divide(intermediateResult, y);
-        }
-    }
-    if (operator === "*") {
-        result = multiply(x, y);
-    } else if (operator === "/") {
-        result = divide(x, y);
-    }
-
-    return round(result, 8);
 }
 
 // Operator active state
@@ -97,32 +81,35 @@ operatorButtons.forEach((button) => {
     button.addEventListener("click", () => { 
         if (currentInput !== "") {
             if (previousInput !== "") {
-              if (intermediateResult !== null) {
-                previousInput = intermediateResult.toString();
-                intermediateResult = null;
-                } else {
-                    previousInput = calculate();
-                }
+                previousInput = calculate();
             } else {
-              previousInput = currentInput;
+                previousInput = currentInput;
             }
             operator = button.dataset.value;
+            lastOperatorClicked = operator; 
             currentInput = "";
-            // updateDisplay();
-          }
+            updateDisplay();
+        } else if (lastOperatorClicked !== null) {
+            operator = button.dataset.value;
+            lastOperatorClicked = operator; 
+            updateDisplay();
+        }
         clearOperatorActive();
         button.classList.add("operator-active");
         });
 })
 
+function operatorOverride() {
+    previousInput = "";
+    currentInput = calculate();
+}
 
 // Equals click event
 let intermediateResult = null;
 const equalButton = document.querySelector(".equals");
 equalButton.addEventListener("click", () => { 
     if (currentInput !== "" && previousInput !== "" && operator !== null) {
-        intermediateResult = calculate(); // Store intermediate result
-        currentInput = intermediateResult.toString();
+        currentInput = calculate();
         previousInput = "";
         operator = null;
         updateDisplay();
