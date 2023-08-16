@@ -15,12 +15,7 @@ const getAdjustedPosition = (element) => {
 export const initialiseAnimation = async (firstOperand, operation, secondOperand) => {
     const electronCanvas = document.getElementById('electrons-animate');
     electronCanvas.style.display = 'block';
-    electronCanvas.style.zIndex = 1;
-    const msgPara = document.getElementById('animationMessage');
-    msgPara.style.position = '';
-    msgPara.style.display = '';
-    msgPara.style.top = '';
-    msgPara.style.top = '';
+    electronCanvas.style.zIndex = 1;    
     return new Promise((resolve) => {
         if(operation === '+') return prepareAddOperation(firstOperand, secondOperand, resolve);
         if(operation === '-') return prepareSubOperation(firstOperand, secondOperand, resolve);
