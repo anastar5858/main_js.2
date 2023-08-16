@@ -45,7 +45,7 @@ export const operate = (operation) => {
     return result;
 }
 // display function
-export const displayHandler = (displayElement) => displayElement.textContent = `${operationsObj.firstOperand} ${operationsObj.operation === '' ? '(No operation)' : operationsObj.operation} ${operationsObj.secondOperand === '' ? '(?)' : operationsObj.secondOperand}`;
+export const displayHandler = (displayElement) => displayElement.textContent = `${operationsObj.firstOperand} ${operationsObj.operation === '' ? '' : operationsObj.operation} ${operationsObj.secondOperand === '' ? '' : operationsObj.secondOperand}`.trim();;
 // number btns handler
 export const numberBtnsHandler = async (e, displayElement, animationMode) => {
     const number = e.target.textContent;
