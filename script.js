@@ -5,18 +5,28 @@ let firstValue = 0;
 let waitingNextValue = false;
 let currentOperator='';
 
-console.log(buttons)
+const digit = ["0","1","2","3","4","5","6","7","8"]
+const operators = {
+    "a" : '+',
+    "s" : '-',
+    "w" : '*',
+    "q" : '/'
+}
+
+// rounding function
+const roundNumber = (num) =>  Math.round(num * 100) / 100
+
 //add function
-const add = (num1, num2) => {return num1 + num2};
+const add = (num1, num2) =>  roundNumber(num1 + num2);
 
 //subtract function
-const subtract = (num1, num2) => num1 - num2;
+const subtract = (num1, num2) => roundNumber(num1 - num2);
 
 //multiply function
-const multiply = (num1, num2) => num1 * num2;
+const multiply = (num1, num2) => roundNumber(num1 * num2);
 
 //divide function
-const divide = (num1, num2) => num2 === 0 ? "not allowed" : num1/num2;
+const divide = (num1, num2) => num2 === 0 ? "not allowed" : roundNumber(num1 / num2);
 
 //calculate function
 const calculate = (operator,num1, num2) => {
@@ -37,8 +47,17 @@ const calculate = (operator,num1, num2) => {
 //operator button handler
 const useOperator = (operator) =>{
     const currentNumber = Number(calculatorDisplay.textContent)
+    if(operator && waitingNextValue){
+        currentOperator = operator;
+        return
+    }
     //asign first value to currentNumber for the first time
     if(!firstValue){firstValue = currentNumber}
+     else{
+        const calculation =  calculate(currentOperator, firstValue, currentNumber)
+       calculatorDisplay.textContent = calculation
+       firstValue = calculation
+    }
     currentOperator = operator;
     waitingNextValue = true;
 }
@@ -50,15 +69,21 @@ const equalSignHandle = () =>{
     }
     if(firstValue){
         const currentNumber = Number(calculatorDisplay.textContent)
-        const calculation = calculate(currentOperator,firstValue,currentNumber);
+        let calculation;
+        if(waitingNextValue){
+            calculation = calculate(currentOperator,firstValue,firstValue);
+        } else{
+            calculation = calculate(currentOperator,firstValue,currentNumber);
+        }
         calculatorDisplay.textContent = calculation
         firstValue = calculation
         if(calculation === "not allowed"){
             alert("Cannot divide by 0")
             clearHandler()
         }
-        currentOperator=""
+        waitingNextValue = true
     }
+    currentOperator =""
     
 }
 
@@ -99,6 +124,23 @@ const decimalHandler = () =>{
     }
 
 }
+//keyboard handler
+const keyboardHandler = (key) =>{
+    if(digit.includes(key)){
+        displayScreen(key)
+    } else if(key === "Backspace"){
+        deleteDigit(key)
+    }
+    else if(key === "Enter"){
+        equalSignHandle()
+    }
+    else if(Object.keys(operators).includes(key)){
+        useOperator(operators[key])
+    }
+}
+// keyboard events
+window.addEventListener("keydown",(e)=>{keyboardHandler(e.key)})
+
 // add event to buttons
 buttons.forEach((btn) => {
     if (btn.classList.length === 0) {
