@@ -16,16 +16,26 @@ export const initialiseAnimation = async (firstOperand, operation, secondOperand
     const electronCanvas = document.getElementById('electrons-animate');
     electronCanvas.style.display = 'block';
     electronCanvas.style.zIndex = 1;
+    const msgPara = document.getElementById('animationMessage');
+    msgPara.style.position = '';
+    msgPara.style.display = '';
+    msgPara.style.top = '';
+    msgPara.style.top = '';
     return new Promise((resolve) => {
-        if(operation === '+') prepareAddOperation(firstOperand, secondOperand, resolve);
-        if(operation === '-') prepareSubOperation(firstOperand, secondOperand, resolve);
-        if(operation === '/') prepareDivOperation(firstOperand, secondOperand, resolve);
+        if(operation === '+') return prepareAddOperation(firstOperand, secondOperand, resolve);
+        if(operation === '-') return prepareSubOperation(firstOperand, secondOperand, resolve);
+        if(operation === '/') return prepareDivOperation(firstOperand, secondOperand, resolve);
+        electronCanvas.style.display = '';
+        electronCanvas.style.zIndex = '';
+        resolve(false);
+
     })
 }
+// Division animations *******************
 const prepareDivOperation = (firstOperand, secondOperand, mainResolve) => {
     // restrection: negative numbers
     // decimal numbers or second operator bigger than first
-    if (Number(firstOperand) < 1 || Number(secondOperand) < 1) {
+    if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || secondOperand.includes('.') || firstOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
@@ -78,10 +88,8 @@ const divisionAnimation = async (msgPara, firstOperand, secondOperand, mainResol
     if (firstOperand === secondOperand) {
         msgPara.style.display = 'block';
         const msgParaClone = msgPara.cloneNode(msgPara);
-        const msgParaCloneRemainder = msgPara.cloneNode(msgPara);
         msgPara.textContent = 'Never mind you guys are good';
         msgParaClone.textContent = 'Clean groups (result)'
-        msgParaCloneRemainder.textContent = 'remainder';
         document.body.appendChild(msgParaClone);
         // main msg under the main div
         msgPara.style.top = divContainerBox.top + 'px';
@@ -93,9 +101,6 @@ const divisionAnimation = async (msgPara, firstOperand, secondOperand, mainResol
         msgParaClone.style.left = displayAreaBox.left + 'px';
         // remainder should be inside of calc-top
         const calcTop = document.getElementById('calc-top');
-        msgParaCloneRemainder.style.top = '0' + 'px'
-        msgParaCloneRemainder.style.left = '5' + 'px'
-        calcTop.appendChild(msgParaCloneRemainder);
         setTimeout(() => {
             divContainer.remove();
             msgPara.style.display = 'none';
@@ -107,10 +112,19 @@ const divisionAnimation = async (msgPara, firstOperand, secondOperand, mainResol
         msgPara.textContent = 'The coach wants groups the same size as us';
         msgPara.style.top = divContainerBox.top + 'px';
         msgPara.style.left = divContainerBox.left + 'px';
-        // start moving groups
-        const displayArea = document.getElementById('display-area');
-        const displayAreaBox = getAdjustedPosition(displayArea);
-        const moveGroups = await moveGroupsTransform(divContainerBox, displayArea, secondOperand, firstOperand);
+        setTimeout(async () => {
+            // start moving groups
+            const displayArea = document.getElementById('display-area');
+            const displayAreaBox = getAdjustedPosition(displayArea);
+            const moveGroups = await moveGroupsTransform(divContainerBox, displayArea, secondOperand, firstOperand);
+            setTimeout(() => {
+                // clean inline styles
+                const electronCanvas = document.getElementById('electrons-animate');
+                electronCanvas.style.display = 'none';
+                electronCanvas.style.zIndex = '';
+                mainResolve(true);
+            }, 1000 * 1)
+        } , 1000 * 1)
     }
 }
 const moveGroupsTransform = async (divContainerBox, displayArea, secondOperand, firstOperand) => {
@@ -137,10 +151,59 @@ const moveGroupsTransform = async (divContainerBox, displayArea, secondOperand, 
             // move remainders to the top
             for (let i = childrenDisplay.length; i > 0; i--) {
                 const moveTop = await moveRemaindersTopAnimation(childrenDisplay[i - 1], calcTopBox, msgPara, i, childrenDisplay.length);
-                console.log('ummm');
             }
+            // after remainders now move to start
+            const groupDivs = [...document.getElementById('calc-top').children];
+            const onlyAnimationDivs = groupDivs.filter((div) => div.classList.contains('animation-box'));
+            for (const animationDiv of onlyAnimationDivs) {
+                const animationDivBox = getAdjustedPosition(animationDiv);
+                const animationDivBoxDiff = Math.abs(animationDivBox.left - calcTopBox.left);
+                const stepSize = animationDivBoxDiff / 100;
+                animationDiv.style.position = 'absolute'
+                const individualDiff = Math.abs(animationDivBox.right - calcTopBox.right);
+                const moveToDefault = await moveToStart(stepSize, animationDiv, animationDivBoxDiff, undefined, individualDiff)
+            }
+            // showcase the result message and resolve to true
+            const msgParaClone = msgPara.cloneNode();
+            calcTop.appendChild(msgParaClone);
+            msgParaClone.style.top = calcTopBox.height / 2;
+            msgParaClone.textContent = 'Clean groups (result)';
+            resolve();
+        } else {
+            console.log('no remainders');
+            const msgPara = document.getElementById('animationMessage');
+            const calcTopBox = getAdjustedPosition(calcTop)
+            // after remainders now move to start
+            const groupDivs = [...document.getElementById('calc-top').children];
+            const onlyAnimationDivs = groupDivs.filter((div) => div.classList.contains('animation-box'));
+            for (const animationDiv of onlyAnimationDivs) {
+                const animationDivBox = getAdjustedPosition(animationDiv);
+                const animationDivBoxDiff = Math.abs(animationDivBox.left - calcTopBox.left);
+                const stepSize = animationDivBoxDiff / 100;
+                animationDiv.style.position = 'absolute'
+                const individualDiff = Math.abs(animationDivBox.right - calcTopBox.right);
+                const moveToDefault = await moveToStart(stepSize, animationDiv, animationDivBoxDiff, undefined, individualDiff)
+            }
+            // showcase the result message and resolve to true
+            const msgParaClone = msgPara.cloneNode();
+            calcTop.appendChild(msgParaClone);
+            msgPara.textContent = '';
+            msgPara.style.display = '';
+            msgPara.style.top = '';
+            msgPara.style.left = '';
+            msgParaClone.style.top = calcTopBox.height / 2;
+            msgParaClone.textContent = 'Clean groups (result)';
+            resolve();
         }
-        // after remainder check we put things in order
+    })
+}
+const moveToStart = async (stepSize, animationDiv, animationDivBoxDiff, thisResolve, individualDiff) => {
+    return new Promise((resolve) => {
+        if (thisResolve === undefined) thisResolve = resolve
+        if (animationDivBoxDiff < individualDiff) return thisResolve()
+        animationDiv.style.left = `calc(${animationDivBoxDiff - stepSize + 'px'} - 0.5rem)`;
+        animationDivBoxDiff = animationDivBoxDiff - stepSize
+        requestAnimationFrame(() => moveToStart(stepSize, animationDiv, animationDivBoxDiff, thisResolve, individualDiff));
     })
 }
 const moveRemaindersTopAnimation = async (remainderDiv, calcTopBox, msgPara, i, childrenLength) => {
@@ -224,7 +287,7 @@ const prepareSubOperation = (firstOperand, secondOperand, mainResolve) => {
         electronCanvas.style.zIndex = '';
         return mainResolve(false);
     } 
-    if (Number(firstOperand) < 1 || Number(secondOperand) < 1) {
+    if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || secondOperand.includes('.') || firstOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
@@ -413,7 +476,7 @@ const prepareAddOperation = (firstOperand, secondOperand, resolve) => {
     // summing restrictions: no summations bigger than 10 for now
     // no negatives as they should be treated as subtraction
     // the retuns will be resolve(false) so that regular logic is performed
-    if (Number(firstOperand) < 1 || Number(secondOperand) < 1) {
+    if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || firstOperand.includes('.') || secondOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';

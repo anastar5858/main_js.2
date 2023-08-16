@@ -60,14 +60,14 @@ detailsElement.addEventListener('toggle', (e) => {
 });
 // animation mode (logic independant) **
 // subtraction animation
-async function test() {
-   const additionAnimation = await animationsOperations.initialiseAnimation('7', '/', '4');
-   console.log('ummm', additionAnimation)
-}
-test()
-// const allBtns = document.querySelectorAll('button');
-// const allBtnsArr = [...allBtns];
-// allBtns.forEach((btn) => btn.addEventListener('click', () => {
-//     const children = document.getElementsByClassName('animation-box');
-//     if (children.length > 0) logicHandlers.removeAnimationElements([...children]);
-// }))
+// async function test() {
+//    const additionAnimation = await animationsOperations.initialiseAnimation('7', '/', '2');
+//    console.log('ummm', additionAnimation)
+// }
+// test()
+const allBtns = document.querySelectorAll('button');
+const allBtnsArr = [...allBtns];
+allBtns.forEach((btn) => btn.addEventListener('click', () => {
+    const children = document.getElementsByClassName('animation-box');
+    if (children.length > 0) logicHandlers.removeAnimationElements([...children]);
+}))

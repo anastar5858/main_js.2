@@ -13,11 +13,17 @@ export const operationsObj = {
 export const removeAnimationElements = (children) => {
     const childrenArr = [...children];
     childrenArr.forEach((child) => child.remove(child));
-    const msgPara = document.getElementById('animationMessage');
-    msgPara.style.display = '';
     const displayArea = document.getElementById('display-area');
+    const msgPara = document.getElementById('animationMessage');
+    const cleanPara = msgPara.cloneNode()
     displayArea.style.display = ''
-    displayArea.textContent = '';
+    const animationMsgs = [...document.getElementsByClassName('animationMessage')];
+    animationMsgs.forEach((animationMsg) => {
+        if (animationMsg !== msgPara) {
+            animationMsg.remove()
+        }
+    })
+    document.body.appendChild(msgPara);
 }
 export const convertToNumber = (str) => Number(str);
 export const convertToString = (argument) => argument.toString();
