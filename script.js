@@ -49,7 +49,11 @@ numberButtons.forEach((button) => {
   });
 });
 function numberClick(button) {
-  currentInput += button.textContent;
+  if (currentInput === "0" && button.textContent !== "0") {
+    currentInput = button.textContent;
+  } else {
+    currentInput += button.textContent;
+  }
   updateDisplay();
 }
 
@@ -159,6 +163,12 @@ document.addEventListener("keypress", (event) => {
       operator = null;
       updateDisplay();
     }
+  }
+  if (event.key === "Backspace") {
+    deleteNumber();
+  }
+  if (event.key === "Delete") {
+    clearScreen();
   }
 });
 document.addEventListener("keydown", (event) => {
