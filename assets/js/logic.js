@@ -23,6 +23,7 @@ export const removeAnimationElements = (children) => {
             animationMsg.remove()
         }
     })
+    msgPara.textContent = '';
     document.body.appendChild(msgPara);
 }
 export const convertToNumber = (str) => Number(str);
