@@ -59,12 +59,6 @@ detailsElement.addEventListener('toggle', (e) => {
     e.target.open ? mainCalcContainer.classList.add('invisible-calc') :mainCalcContainer.classList.remove('invisible-calc');
 });
 // animation mode (logic independant) **
-// subtraction animation
-// async function test() {
-//    const additionAnimation = await animationsOperations.initialiseAnimation('7', '/', '2');
-//    console.log('ummm', additionAnimation)
-// }
-// test()
 const allBtns = document.querySelectorAll('button');
 const allBtnsArr = [...allBtns];
 allBtns.forEach((btn) => btn.addEventListener('click', () => {
