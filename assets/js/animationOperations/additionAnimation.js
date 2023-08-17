@@ -1,15 +1,18 @@
 import { getAdjustedPosition } from '../animationOperations.js';
 export const prepareAddOperation = (firstOperand, secondOperand, resolve) => {
+    document.getElementById('animaion-msg').style.display = 'block';
     if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || firstOperand.includes('.') || secondOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         return resolve(false);
     } 
     if (Number(firstOperand) + Number(secondOperand) > 10) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         return resolve(false);
     } 
     const resultArea = document.getElementById('results-area');
@@ -77,10 +80,12 @@ const moveBox = async(msgPara, currentBox, stepX, stepY, distanceX, distanceY, r
         const currentLeft = Number(getComputedStyle(currentBox).left.split('').filter((c) => !isNaN(c) || c== '.').join(''));
         const currentBoxBox = getAdjustedPosition(currentBox);
         if (currentTop > distanceY && currentLeft < distanceX) {
+            document.getElementById('animaion-msg').style.display = 'none';
             resolve2();
             return
         }
         if (currentTop > distanceY && currentLeft > distanceX) {
+            document.getElementById('animaion-msg').style.display = 'none';
             resolve2();
             return
         }

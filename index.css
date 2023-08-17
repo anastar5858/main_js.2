@@ -236,3 +236,10 @@ button:focus{
 #div-add-cont {
     display: flex;
 }
+#animaion-msg {
+    position: absolute;
+    right: 0;
+    font-size: xx-large;
+    display: none;
+    text-align: center;
+}

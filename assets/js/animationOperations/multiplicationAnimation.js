@@ -1,15 +1,18 @@
 import { getAdjustedPosition } from '../animationOperations.js';
 export const prepareMulOperation = (firstOperand, secondOperand, mainResolve) => {
+    document.getElementById('animaion-msg').style.display = 'block';
     if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || secondOperand.includes('.') || firstOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         return mainResolve(false);
     }
     if (Number(secondOperand) > 3 || Number(firstOperand) > 3) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         return mainResolve(false);
     }
     const resultArea = document.getElementById('results-area');
@@ -70,6 +73,7 @@ const  multiplicationAnimation = async (msgPara, firstOperand, secondOperand, la
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = '';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         mainResolv(true);
     }, 1000 * 1);
 }

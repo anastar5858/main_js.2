@@ -1,4 +1,5 @@
 export const configureCanvasDimensions = (canvas) => {
+    document.getElementById('animaion-msg').style.display = 'block';
     return new Promise((resolve) => {
         canvas.style.display = 'block';
         const displayArea = document.getElementById('display-area');
@@ -35,6 +36,7 @@ const animateClear = (xStep, ctx, yTop, yBottom, alternate, canvasWidth, animati
             document.getElementById('display-area').style.fontFamily = '';
             document.getElementById('display-area').style.letterSpacing = '';
             canvas.style.display = ''
+            document.getElementById('animaion-msg').style.display = 'none';
             resolve()
         }, 1000 * 1)
         return
