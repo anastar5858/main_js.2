@@ -44,7 +44,7 @@ function calculate() {
   } else if (operator === "/") {
     result = divide(x, y);
   }
-  return round(result, 8);
+  return round(result, 4);
 }
 
 const numberButtons = document.querySelectorAll(".number");
