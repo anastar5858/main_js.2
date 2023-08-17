@@ -77,7 +77,6 @@ const  multiplicationAnimation = async (msgPara, firstOperand, secondOperand, la
             const animateChild = await multiplyOffsetAnimate(start, ending, stepSize, offset, lastBoxBox, undefined, msgPara);
             // update last child
             lastBox = offset;
-            // console.log('wow', offset, lastBox, innerDisplayArea);
         }
     }
     setTimeout(() => {

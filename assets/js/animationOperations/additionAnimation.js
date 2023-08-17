@@ -91,8 +91,6 @@ const moveBox = async(msgPara, currentBox, stepX, stepY, distanceX, distanceY, r
         const currentBoxBox = getAdjustedPosition(currentBox);
         // check for all direction
         // bottom and left direction
-        console.log('reached here',currentLeft > distanceX );
-
         if (currentTop > distanceY && currentLeft < distanceX) {
             resolve2();
             return

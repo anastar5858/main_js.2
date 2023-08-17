@@ -164,7 +164,6 @@ const moveRightSubtract = async (rightStep, rightDistance, leftDistance, lastBox
         if (rightStep > rightDistance) return thisResolve()
         lastBox.style.left = `calc(${(0 + leftDistance) + rightStep + 'px'} - 0.5rem)`;
         rightStep += stepSize;
-        // console.log(rightStep, stepSize)
         requestAnimationFrame(() => moveRightSubtract(rightStep, rightDistance, leftDistance, lastBox, captureStep, stepSize, thisResolve));
     })
 }

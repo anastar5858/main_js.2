@@ -137,7 +137,6 @@ const moveGroupsTransform = async (divContainerBox, displayArea, secondOperand, 
             msgParaClone.textContent = 'Clean groups (result)';
             resolve();
         } else {
-            console.log('no remainders');
             const msgPara = document.getElementById('animationMessage');
             const calcTopBox = getAdjustedPosition(calcTop)
             // after remainders now move to start

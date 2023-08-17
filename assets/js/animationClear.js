@@ -32,7 +32,6 @@ const  animateClearSet = (canvas, resolve) => {
 }
 const animateClear = (xStep, ctx, yTop, yBottom, alternate, canvasWidth, animationStep, numberOfCharacters, canvas, resolve) => {
     xStep = Math.round(xStep * 100) / 100;
-    console.log(xStep, canvasWidth, animationStep, animationStep * 40)
     if (xStep === animationStep * 30) {
         // remove all added inline-styles for the animation
         setTimeout(() => {

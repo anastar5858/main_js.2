@@ -81,7 +81,6 @@ const animateRight = (ctx, start, animationStep, y, rightX, calcContainerArea, c
     start += animationStep
     requestAnimationFrame(() => animateRight(ctx, start, animationStep, y, rightX, calcContainerArea, canvas, btn, animateElectron, resolve))
 }
-
 const animateUp = (ctx, x, animationStep, start, upY, calcContainerArea, canvas, btn, animateElectron, resolve) => {
     if (animateElectron) {
         if (Math.floor(start) <= Math.floor(upY)) {
@@ -166,7 +165,6 @@ const animateLeft = (ctx, start, animationStep, y, leftX, calcContainerArea, can
     start -= animationStep
     requestAnimationFrame(() => animateLeft(ctx, start, animationStep, y, leftX, calcContainerArea, canvas, btn, animateElectron, resolve))
 }
-
 const animateBottom = (ctx, x, animationStep, start, bottomY, calcContainerArea, canvas, btn, animateElectron, resolve) => {
     if (animateElectron) {
         if (Math.floor(start) >= Math.floor(bottomY)) {

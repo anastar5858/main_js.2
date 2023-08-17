@@ -12,7 +12,6 @@ const targetsStylesClasses = {
     "display-text-con": 'display-text-con-dark',
     "calc-top": 'calc-top-dark'
 }
-
 export function enableDarkMode () {
     for (let target in targetsStylesClasses) {
         const targetDom = document.getElementsByClassName(target);
@@ -21,7 +20,6 @@ export function enableDarkMode () {
         targetDomArray.forEach((element) => element.classList.add(newClass))
     }
 }
-
 export function disableDarkMode() {
     for (let target in targetsStylesClasses) {
         const targetDom = document.getElementsByClassName(target);
