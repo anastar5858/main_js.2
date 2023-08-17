@@ -1,25 +1,30 @@
 function add(x, y) {
-  return x + y;
+  return parseFloat(x) + parseFloat(y);
 }
 
 function subtract(x, y) {
-  return x - y;
+  return parseFloat(x) - parseFloat(y);
 }
 
 function multiply(x, y) {
-  return x * y;
+  return parseFloat(x) * parseFloat(y);
 }
 
 function divide(x, y) {
-  if (y === 0) {
-    return "Not a number";
+  if (parseFloat(y) === 0) {
+    return "not a number";
   }
-  return x / y;
+  return parseFloat(x) / parseFloat(y);
 }
 
 // round
 function round(value, decimals) {
-  return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+  if (value !== "not a number") {
+    return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+
+  } else {
+    return value
+  }
 }
 
 let currentInput = "";
@@ -27,8 +32,8 @@ let previousInput = "";
 let operator = null;
 
 function calculate() {
-  const x = parseFloat(previousInput);
-  const y = parseFloat(currentInput);
+  const x = previousInput;
+  const y = currentInput;
   let result;
   if (operator === "+") {
     result = add(x, y);
@@ -82,6 +87,19 @@ equalButton.addEventListener("click", () => {
     updateDisplay();
   }
 });
+
+const signButton = document.getElementById("sign");
+signButton.addEventListener("click", () => {
+  changeSign();
+});
+
+function changeSign() {
+  if (currentInput !== "") {
+    currentInput = parseFloat(currentInput) * -1;
+    updateDisplay();
+  }
+}
+
 
 const clearButton = document.getElementById("clear");
 clearButton.addEventListener("click", () => {
