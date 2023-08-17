@@ -21,6 +21,12 @@ if (y === 0) {
 return x / y;
 }
 
+function checkForNaN(value) {
+    if (isNaN()) {
+        return "Not a number";
+    }
+}
+
 // Round number 
 function round(vlaue, decimals) {
     return Number(Math.round(vlaue + "e" + decimals) + "e-" + decimals);
@@ -46,7 +52,7 @@ function calculate() {
         result = subtract(x, y);
     }
 
-    return round(result, 8);
+    return round(result, 10);
 
 }
 
@@ -198,6 +204,20 @@ document.addEventListener("keydown", (event) => {
             updateDisplay();
         }
     }
+
+    // const operatorKeys = ["+", "-", "*", "/"];
+    // if (event.key = includes(operatorKeys)) {
+    //     if (currentInput !== "") {
+    //         if (previousInput !== "") {
+    //             previousInput = calculate();
+    //         } else {
+    //             previousInput = currentInput;
+    //         }
+    //         operator = event.key;
+    //         currentInput = "";
+    //         updateDisplay();
+    //     }
+    // }
         
     // Keyboard enter
     if (event.key === "Enter") {
@@ -208,7 +228,7 @@ document.addEventListener("keydown", (event) => {
           updateDisplay();
           clearInputs();
         }
-      }
+    }
 
     // Keyboard Backspace & Delete
     if (event.key === "Backspace") {
@@ -218,4 +238,3 @@ document.addEventListener("keydown", (event) => {
         clearDisplay();
     }
 })
-
