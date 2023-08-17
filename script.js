@@ -51,9 +51,8 @@ function calculate() {
     } else if (operator === "-") {
         result = subtract(x, y);
     }
-
+    checkForNaN();
     return round(result, 10);
-
 }
 
 // Operator active state
