@@ -44,7 +44,9 @@ function calculate() {
   } else if (operator === "/") {
     result = divide(x, y);
   }
+
   return round(result, 4);
+
 }
 
 const numberButtons = document.querySelectorAll(".number");
@@ -56,7 +58,11 @@ numberButtons.forEach((button) => {
 function numberClick(button) {
   if (currentInput === "0" && button.textContent !== "0") {
     currentInput = button.textContent;
-  } else {
+  } 
+  else if (currentInput === "not a number") {
+    clearScreen()
+  }
+  else {
     currentInput += button.textContent;
   }
   updateDisplay();
