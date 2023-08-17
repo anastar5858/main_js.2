@@ -1,0 +1,238 @@
+button {
+    padding: 0.2rem;
+    cursor: pointer;
+    border-radius: 50px;
+}
+button:hover {
+    opacity: 0.7;
+    transform: scale(0.95);
+}
+button:focus{
+    opacity: 0.7;
+    transform: scale(0.95);
+}
+.big {
+    font-size: 24px;
+}
+.mid-font {
+    font-size: 15px;
+}
+.promi {
+    background-color: #D9D9D9;
+}
+.calc-con {
+    box-shadow: 3px 3px 0.4em black,
+    -1em 0 0.4em black;
+    width: 75vw;
+    max-height: fit-content;
+    margin: 20% auto 0 auto;
+    border: 0.5rem solid white;
+    border-radius: 50px;
+    background: linear-gradient(#D1D5D5, #9DFD9B, #FFC3BB );
+}
+.calc-top {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 25%;
+    border-radius: 50px;
+    background-color: #ffffff;
+}
+.display-text-con {
+    word-break: break-all;
+    min-height: 10%;
+    background-color: lightgrey;
+    width: 100%;
+    text-align: center;
+    height: fit-content;
+}
+#display-area {
+    margin: 0;
+}
+.clear-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.result {
+    position: absolute;
+    display: block;
+    border-radius: 100%;
+    padding: 0.5rem;
+    max-width: 100%;
+    overflow: auto;
+    height: fit-content;
+    right: 0;
+    bottom: 0;
+}
+.calc-mid {
+    width: 100%;
+    max-height: 50%;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.numbers-flex {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8%;
+}
+.numbers-flex > * {
+    background-color: #D9D9D9;
+    margin-top: 1rem;
+    flex: 0 0 25.33333%;
+}
+.mid-green {
+    cursor: pointer;
+    background-color: #8DFFC9;
+    width: 20%;
+    font-size: 15px;
+}
+.calc-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 15px;
+    margin-top: 2rem;
+    margin-left: calc(20% + 2rem);
+    margin-right: calc(20% + 2rem);
+}
+.calc-bottom > * {
+    margin-bottom: 2rem;
+}
+.undo-redo {
+    display: flex;
+    gap: 2rem;
+}
+.undo-redo > * {
+    padding: 0.5rem;
+    cursor: pointer;
+    background-color: #FF5555;
+}
+.operators {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5%;
+    width: fit-content;
+
+}
+.operators > * {
+    background-color: #FFB7B7;
+    margin-top: 1rem;
+    flex: 1 1 45%;
+}
+#equal-btn {
+    font-size: x-large;
+    width: 5rem;
+    background-color: #FF8F8F;
+    border-radius: 50%;
+}
+@media only screen and (max-width: 404px) {
+    .mode-text {
+        display: none;
+    } 
+}
+@media only screen and (min-width: 600px) {
+    .mid-green {
+        width: fit-content;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .calc-con {
+        margin-top: 0;
+        width: 30vw;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .invisible-calc {
+        display: none;
+    }
+}
+.dark-body, .result-text-dark, .undo-dark, .calc-con-dark, .btn-numbers-dark, .operators-dark, .equal-dark, .mid-green-dark, .result-dark, .clear-btn-dark {
+    color: white;
+}
+.dark-body {
+    background-color: black;
+}
+.undo-dark {
+    background-color: #363636;
+}
+.calc-con-dark {
+    background: none;
+    border: none;
+    box-shadow: 3px 3px 0.4em #303030,
+    -1em 0 0.4em #1f1f1f;
+    background-color: #303030;
+}
+.btn-numbers-dark {
+    background-color: #1f1f1f;
+}
+.operators-dark {
+    background-color: #2a2a2a;
+}
+.equal-dark {
+    background-color: #2a2a2a;
+}
+.mid-green-dark {
+    background-color: #272827;
+}
+.result-dark {
+    background-color: #262626;
+}
+.clear-btn-dark {
+    background-color: #262626;
+}
+.display-text-con-dark {
+    min-height: 10%;
+    background-color: #484848;
+}
+.calc-top-dark {
+    background-color: #303030;
+}
+#add, #sub {
+    margin-top: 0;
+}
+.instruct {
+    margin-top: 1rem;
+    display: block;
+}
+.details-container {
+    position: relative;
+  }
+.details-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+}
+.keyboard-instructions {
+    margin-top: 1rem;
+    width: fit-content;
+}
+.key-short {
+    margin-bottom: 1rem;
+    display: block;
+}
+#clear-animate {
+    display: none;
+}
+#electrons-animate {
+    display: none;
+}
+.animation-box {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
+    background-color: gold;
+}
+#animationMessage {
+    display: none;
+}
+#div-add-cont {
+    display: flex;
+}
