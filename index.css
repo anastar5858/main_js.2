@@ -45,6 +45,7 @@ button:focus{
     background-color: #ffffff;
 }
 .display-text-con {
+    word-break: break-all;
     min-height: 10%;
     background-color: lightgrey;
     width: 100%;
@@ -139,6 +140,9 @@ button:focus{
     background-color: #FF8F8F;
     border-radius: 35%;
 }
+.calc-modes {
+    position: fixed;
+}
 /* responsiveness considerations */
 @media only screen and (max-width: 404px) {
     .mode-text {
@@ -153,7 +157,7 @@ button:focus{
 @media only screen and (min-width: 1000px) {
     .calc-con {
         margin-top: 0;
-        width: fit-content;
+        width: 30vw;
     }
 }
 @media only screen and (max-width: 1000px) {
@@ -213,7 +217,6 @@ button:focus{
     width: fit-content;
     position: fixed;
 }
-
 /* animation styles */
 #clear-animate {
     display: none;

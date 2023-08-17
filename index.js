@@ -2,9 +2,6 @@ import * as darkMode from './assets/js/dark.js';
 import * as logicHandlers from './assets/js/logic.js';
 import * as keyboardFuncNav from './assets/js/keyboardNav.js';
 import * as keyboardFuncShort from './assets/js/keyboardShort.js';
-import * as animationsClear from './assets/js/animationClear.js';
-import * as animationsElectron from './assets/js/animationElectrons.js';
-import * as animationsOperations from './assets/js/animationOperations.js';
 // handle dark mode (logic independant) **
 let animationMode = false;
 const darkModeInput = document.getElementById('dark-mode');
