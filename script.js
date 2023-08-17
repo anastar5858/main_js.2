@@ -133,10 +133,12 @@ const keyboardHandler = (key) =>{
     }
     else if(key === "Enter"){
         equalSignHandle()
+    } else if(key === " "){
+        clearHandler()
     }
     else if(Object.keys(operators).includes(key)){
         useOperator(operators[key])
-    }
+    } 
 }
 // keyboard events
 window.addEventListener("keydown",(e)=>{keyboardHandler(e.key)})

@@ -29,6 +29,7 @@
     padding:25px;
     background-color: var(--keypad-background);
   }
+  
 
   /* buttons */
 .calculator-buttons{
@@ -99,6 +100,7 @@
   }
 
   .calculator-container{
+    padding-top: 5vh;
     width: 50%;
     max-width: 480px;
     min-width: 345px;
