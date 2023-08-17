@@ -1,6 +1,5 @@
 import { getAdjustedPosition } from '../animationOperations.js';
 export const prepareDivOperation = (firstOperand, secondOperand, mainResolve) => {
-    document.getElementById('animaion-msg').style.display = 'block';
     if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || secondOperand.includes('.') || firstOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
@@ -22,6 +21,7 @@ export const prepareDivOperation = (firstOperand, secondOperand, mainResolve) =>
         document.getElementById('animaion-msg').style.display = 'none';
         return mainResolve(false);
     }
+    document.getElementById('animaion-msg').style.display = 'block';
     const resultArea = document.getElementById('results-area');
     resultArea.textContent = '';
     const displayArea = document.getElementById('display-area');
