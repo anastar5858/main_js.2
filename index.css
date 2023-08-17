@@ -54,7 +54,6 @@ button:focus{
     position: absolute;
     right: 0;
     top: 0;
-
 }
 .result {
     position: absolute;
@@ -127,16 +126,11 @@ button:focus{
     margin-top: 1rem;
     flex: 1 1 45%;
 }
-.equal {
+#equal-btn {
     font-size: x-large;
-    width: fit-content;
+    width: 5rem;
     background-color: #FF8F8F;
-    border-radius: 35%;
-}
-.calc-modes {
-    position: fixed;
-    top: 0;
-    left: 0;
+    border-radius: 50%;
 }
 @media only screen and (max-width: 404px) {
     .mode-text {
@@ -200,16 +194,29 @@ button:focus{
 .calc-top-dark {
     background-color: #303030;
 }
+#add, #sub {
+    margin-top: 0;
+}
 .instruct {
     margin-top: 1rem;
     display: block;
 }
+.details-container {
+    position: relative;
+  }
+.details-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+}
 .keyboard-instructions {
-    margin-top: 2rem;
+    margin-top: 1rem;
     width: fit-content;
-    position: fixed;
-    top: 0;
-    left: 1rem;
+}
+.key-short {
+    margin-bottom: 1rem;
+    display: block;
 }
 #clear-animate {
     display: none;

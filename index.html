@@ -10,34 +10,41 @@
     <canvas id="electrons-animate"></canvas>
     <div id="div-add-cont"></div>
     <header>
+        <span class="key-short">Press (x) to activate dark mode.</span>
+        <span class="key-short">Press (c) to activate animation mode.</span>
+        <span class="key-short">Press (z) to toggle keyboard shortcuts.</span>
         <div class="calc-modes">
             <input id="dark-mode" class="header-input" type="checkbox">
             <label for="dark-mode">Dark Mode</label>
             <input id="animation-mode" class="header-input" type="checkbox">
             <label for="animation-mode">Animation Mode</label>
         </div>
-        <details id="keyboard-instructions" class="keyboard-instructions">
-            <summary>Keyboard Shortcuts:</summary>
-            <strong class="instruct">(DELETE) = Clear Calculator.</strong>
-            <strong class="instruct">(.) = Add Decimal Point.</strong>
-            <strong class="instruct">(-) = Change Sign +/-.</strong>
-            <strong class="instruct">(BACKSPACE) = Undo Last Step.</strong>
-            <strong class="instruct">(#) = Redo Last Step.</strong>
-            <strong class="instruct">(A) = Perform Addition.</strong>
-            <strong class="instruct">(S) = Perform Subtraction.</strong>
-            <strong class="instruct">(Q) = Perdorm Division.</strong>
-            <strong class="instruct">(W) = Perform Multiplication.</strong>
-            <strong class="instruct">(=) = Equals.</strong>
-            <strong class="instruct">(1) = Add 1 to Display.</strong>
-            <strong class="instruct">(2) = Add 2 to Display.</strong>
-            <strong class="instruct">(3) = Add 3 to Display.</strong>
-            <strong class="instruct">(4) = Add 4 to Display.</strong>
-            <strong class="instruct">(5) = Add 5 to Display.</strong>
-            <strong class="instruct">(6) = Add 6 to Display.</strong>
-            <strong class="instruct">(7) = Add 7 to Display.</strong>
-            <strong class="instruct">(8) = Add 8 to Display.</strong>
-            <strong class="instruct">(9) = Add 9 to Display.</strong>
-        </details>
+        <div class="details-container">
+            <details id="keyboard-instructions" class="keyboard-instructions">
+                <summary>Keyboard Shortcuts:</summary>
+                    <div class="details-content">
+                    <strong class="instruct">(DELETE) = Clear Calculator.</strong>
+                    <strong class="instruct">(.) = Add Decimal Point.</strong>
+                    <strong class="instruct">(-) = Change Sign +/-.</strong>
+                    <strong class="instruct">(BACKSPACE) = Undo Last Step.</strong>
+                    <strong class="instruct">(#) = Redo Last Step.</strong>
+                    <strong class="instruct">(A) = Perform Addition.</strong>
+                    <strong class="instruct">(S) = Perform Subtraction.</strong>
+                    <strong class="instruct">(Q) = Perdorm Division.</strong>
+                    <strong class="instruct">(W) = Perform Multiplication.</strong>
+                    <strong class="instruct">(=) = Equals.</strong>
+                    <strong class="instruct">(1) = Add 1 to Display.</strong>
+                    <strong class="instruct">(2) = Add 2 to Display.</strong>
+                    <strong class="instruct">(3) = Add 3 to Display.</strong>
+                    <strong class="instruct">(4) = Add 4 to Display.</strong>
+                    <strong class="instruct">(5) = Add 5 to Display.</strong>
+                    <strong class="instruct">(6) = Add 6 to Display.</strong>
+                    <strong class="instruct">(7) = Add 7 to Display.</strong>
+                    <strong class="instruct">(8) = Add 8 to Display.</strong>
+                    <strong class="instruct">(9) = Add 9 to Display.</strong>
+                </div>
+            </details>
+        </div>
     </header>
     <main id="main-calc-con" class="calc-con">
     <section id="calc-top" class="calc-top">
