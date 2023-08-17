@@ -74,7 +74,12 @@ operatorButtons.forEach((button) => {
     if (currentInput !== "") {
       if (previousInput !== "") {
         previousInput = calculate();
-      } else {
+
+      } 
+      else if (currentInput === "not a number") {
+        clearScreen()
+      }
+      else {
         previousInput = currentInput;
       }
       operator = button.dataset.value;
