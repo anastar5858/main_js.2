@@ -1,8 +1,5 @@
 import { getAdjustedPosition } from '../animationOperations.js';
 export const prepareMulOperation = (firstOperand, secondOperand, mainResolve) => {
-    // restrection: negative numbers
-    // no decimals
-    // first operand or second operand must not be bigger than 3 (easier animation)
     if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || secondOperand.includes('.') || firstOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
@@ -15,13 +12,9 @@ export const prepareMulOperation = (firstOperand, secondOperand, mainResolve) =>
         electronCanvas.style.zIndex = '';
         return mainResolve(false);
     }
-    // clear result area
     const resultArea = document.getElementById('results-area');
     resultArea.textContent = '';
-     // last box used fot reference later
      let lastBox;
-     // the display area gets populated with boxes
-     // boxes dimensions 1rem * 1rem and 0.5 rem gap
      const displayArea = document.getElementById('display-area');
      displayArea.style.display = 'flex'
      displayArea.textContent = '';
@@ -31,13 +24,11 @@ export const prepareMulOperation = (firstOperand, secondOperand, mainResolve) =>
          displayArea.appendChild(box)
          if (i === firstOperand - 1) lastBox = box;
      }
-         // start animation
     const msgPara = document.getElementById('animationMessage');
     msgPara.style.position = 'absolute';
     setTimeout(() => requestAnimationFrame(() => multiplicationAnimation(msgPara, firstOperand, secondOperand, lastBox, mainResolve)), 1000 * 1);
 }
 const  multiplicationAnimation = async (msgPara, firstOperand, secondOperand, lastBox, mainResolv) => {
-    // prepare divs of second operand at the top
     const body = document.getElementsByClassName('body')[0];
     const bodyBox = getAdjustedPosition(body);
     const divContainer = document.getElementById('div-add-cont');
@@ -54,8 +45,6 @@ const  multiplicationAnimation = async (msgPara, firstOperand, secondOperand, la
     msgPara.textContent = `You need to reproduce people the same number as yourselves ${secondOperand} times`;
     msgPara.style.top = divContainerBox.top + 'px';
     msgPara.style.left = divContainerBox.left + 'px';
-    // start animation 
-    // prepare groups
     for(let i = 0; i < secondOperand - 1; i++) {
         for(let j = 0; j < firstOperand; j++) {
             const lastBoxBox = getAdjustedPosition(lastBox);
@@ -66,16 +55,13 @@ const  multiplicationAnimation = async (msgPara, firstOperand, secondOperand, la
             calcTop.appendChild(offset);
             calcTop.appendChild(msgPara)
             offset.style.position = 'absolute'; 
-            // starting point 
             const start =  0 + calcTopBox.width;       
             offset.style.left = start + 'px';
             msgPara.textContent = `Reproducing from parent ${i + 1} child ${j + 1}`
             msgPara.style.left = start + 'px';
-            // ending point
             const ending = Math.abs(calcTopBox.left) - lastBoxBox.right;
             const stepSize = ending / 50;
             const animateChild = await multiplyOffsetAnimate(start, ending, stepSize, offset, lastBoxBox, undefined, msgPara);
-            // update last child
             lastBox = offset;
         }
     }

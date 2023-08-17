@@ -1,4 +1,3 @@
-// define the targets and classes to be added/removed;
 const targetsStylesClasses = {
     body: 'dark-body',
     undo: 'undo-dark',

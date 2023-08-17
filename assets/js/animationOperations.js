@@ -15,7 +15,6 @@ export const getAdjustedPosition = (element) => {
         height: rect.height
     };
 }
-// above is helping funciton to account for scrolls
 export const initialiseAnimation = async (firstOperand, operation, secondOperand) => {
     const electronCanvas = document.getElementById('electrons-animate');
     electronCanvas.style.display = 'block';
