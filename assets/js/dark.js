@@ -4,7 +4,7 @@ const targetsStylesClasses = {
     "calc-con": 'calc-con-dark',
     "btn-numbers": 'btn-numbers-dark',
     "operator": 'operators-dark',
-    equal: 'equal-dark',
+    "equal-btn": 'equal-dark',
     "mid-green": "mid-green-dark",
     result: 'result-dark',
     "clear-btn": 'clear-btn-dark',
