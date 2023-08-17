@@ -20,9 +20,9 @@ export const initialiseAnimation = async (firstOperand, operation, secondOperand
     electronCanvas.style.display = 'block';
     electronCanvas.style.zIndex = 1;    
     return new Promise((resolve) => {
-        if(operation === '+') return additionAnimation.prepareAddOperation(firstOperand, secondOperand, resolve);
-        if(operation === '-') return subtractionAnimation.prepareSubOperation(firstOperand, secondOperand, resolve);
-        if(operation === '/') return divisionAnimation.prepareDivOperation(firstOperand, secondOperand, resolve);
-        if(operation === '*') return multiplicationAnimation.prepareMulOperation(firstOperand, secondOperand, resolve);
+        if(operation === '+') additionAnimation.prepareAddOperation(firstOperand, secondOperand, resolve);
+        if(operation === '-') subtractionAnimation.prepareSubOperation(firstOperand, secondOperand, resolve);
+        if(operation === '/') divisionAnimation.prepareDivOperation(firstOperand, secondOperand, resolve);
+        if(operation === '*') multiplicationAnimation.prepareMulOperation(firstOperand, secondOperand, resolve);
     })
 }

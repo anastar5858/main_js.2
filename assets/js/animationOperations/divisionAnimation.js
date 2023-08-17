@@ -1,21 +1,25 @@
 import { getAdjustedPosition } from '../animationOperations.js';
 export const prepareDivOperation = (firstOperand, secondOperand, mainResolve) => {
+    document.getElementById('animaion-msg').style.display = 'block';
     if (Number(firstOperand) < 0 || Number(secondOperand) < 0 || secondOperand.includes('.') || firstOperand.includes('.')) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         return mainResolve(false);
     }
     if (Number(secondOperand) > Number(firstOperand)) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         return mainResolve(false);
     }
     if (Number(firstOperand) > 7) {
         const electronCanvas = document.getElementById('electrons-animate');
         electronCanvas.style.display = 'none';
         electronCanvas.style.zIndex = '';
+        document.getElementById('animaion-msg').style.display = 'none';
         return mainResolve(false);
     }
     const resultArea = document.getElementById('results-area');
@@ -77,6 +81,7 @@ const divisionAnimation = async (msgPara, firstOperand, secondOperand, mainResol
                 const electronCanvas = document.getElementById('electrons-animate');
                 electronCanvas.style.display = 'none';
                 electronCanvas.style.zIndex = '';
+                document.getElementById('animaion-msg').style.display = 'none';
                 mainResolve(true);
             }, 1000 * 1)
         } , 1000 * 1)

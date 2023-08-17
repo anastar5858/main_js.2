@@ -1,5 +1,6 @@
 import { getAdjustedPosition } from './animationOperations.js';
 export const configureCanvasDimensions = async (canvas, btn) => {
+    document.getElementById('animaion-msg').style.display = 'block';
     return new Promise((resolve) => {
         canvas.style.display = 'block';
         canvas.style.zIndex = 1;
@@ -141,6 +142,7 @@ const animateBottom = (ctx, x, animationStep, start, bottomY, calcContainerArea,
             canvas.style.display = '';
             canvas.style.zIndex = '';
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            document.getElementById('animaion-msg').style.display = 'none';
             resolve();
         }, 1000 * 1);
         return
