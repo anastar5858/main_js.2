@@ -27,7 +27,7 @@ export const convertToNumber = (str) => Number(str);
 export const convertToString = (argument) => argument.toString();
 const add = (a,b) => a + b;
 const subtract = (a,b) => a - b;
-const divide = (a,b) => b === 0 ? 'Not Allowed' : a / b;
+const divide = (a,b) => b === 0 || b === NaN ? 'Not Allowed' : a / b;
 const multipliy = (a,b) => a * b;
 export const operate = (operation) => {
     let result;
@@ -76,7 +76,7 @@ export const equalBtnHandler = async (displayArea, resultArea, shortcut, animati
         setTimeout(() => resultArea.textContent = prevValue, 1000)
     } else {
         let result = operate(operationsObj.operation);
-        if (result === 'Not Allowed') return resultArea.textContent = result;
+        if (isNaN(result)) return resultArea.textContent = 'Not Allowed';
         result = Math.round(result * 1000) / 1000;  
         const electronCanvas = document.getElementById('electrons-animate');
         let carryWithAnimation = false;
