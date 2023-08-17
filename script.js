@@ -34,6 +34,7 @@ let operator = null;
 function calculate() {
   const x = previousInput;
   const y = currentInput;
+
   let result;
   if (operator === "+") {
     result = add(x, y);
@@ -59,6 +60,9 @@ function numberClick(button) {
   if (currentInput === "0" && button.textContent !== "0") {
     currentInput = button.textContent;
   } 
+  else if (currentInput === "0" && button.textContent === "0" && !currentInput.includes(".") ){
+    currentInput
+  }
   else if (currentInput === "not a number") {
     clearScreen()
   }
@@ -82,12 +86,17 @@ operatorButtons.forEach((button) => {
       else {
         previousInput = currentInput;
       }
+
+      
       operator = button.dataset.value;
       currentInput = "";
       updateDisplay();
+      
+
     }
   });
 });
+
 
 const equalButton = document.getElementById("calculate");
 equalButton.addEventListener("click", () => {
@@ -126,11 +135,14 @@ function clearScreen() {
 
 const backSpace = document.getElementById("delete");
 backSpace.addEventListener("click", () => {
+  
   deleteNumber();
+  
 });
 
 function deleteNumber() {
-  if (currentInput !== "0") {
+
+  if (currentInput !== null) {
     currentInput = currentInput.toString().slice(0, -1);
     updateDisplay();
   }
@@ -138,6 +150,7 @@ function deleteNumber() {
     currentInput = "";
     updateDisplay();
   }
+
 }
 
 const decimalButton = document.getElementById("decimal");
